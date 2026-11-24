@@ -4,7 +4,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.errors import register_error_handlers
-from app.api.routes import admin, analyze, auth, health, history, meta, reports, users
+from app.api.routes import (
+    admin,
+    analyze,
+    api_keys,
+    auth,
+    billing,
+    health,
+    history,
+    meta,
+    reports,
+    users,
+)
 from app.core.config import settings
 from app.core.middleware import register_middlewares
 from app.core.version import API_VERSION
@@ -35,6 +46,8 @@ app.include_router(analyze.router)
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(history.router)
+app.include_router(billing.router)
+app.include_router(api_keys.router)
 app.include_router(admin.router)
 
 

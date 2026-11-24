@@ -13,6 +13,9 @@ export function Header() {
     { label: t("nav_report"), href: "/signalement" },
     { label: t("nav_levels"), href: "/securite" },
     { label: t("nav_privacy"), href: "/confidentialite" },
+    { label: t("nav_offers"), href: "/offres" },
+    { label: t("nav_docs"), href: "/documentation" },
+    { label: t("nav_api_keys"), href: "/cles-api" },
     { label: t("nav_admin"), href: "/admin" },
   ];
 

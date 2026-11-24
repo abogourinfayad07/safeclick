@@ -145,6 +145,33 @@ export interface AdminStats {
   note: string;
 }
 
+export interface ApiKeyCreated {
+  id: string;
+  name: string;
+  prefix: string;
+  key: string;
+  dailyQuota: number;
+  createdAt: string;
+  notice: string;
+}
+
+export interface ApiKeyItem {
+  id: string;
+  name: string;
+  prefix: string;
+  dailyQuota: number;
+  usageCount: number;
+  createdAt: string;
+  revokedAt: string | null;
+}
+
+export interface Subscription {
+  plan: string;
+  planName: string;
+  paymentActive: boolean;
+  note: string;
+}
+
 export const api = {
   analyzeUrl: (url: string) =>
     request<AnalysisResult>("/analyze/url", {
@@ -215,4 +242,15 @@ export const api = {
     }, true),
 
   getAdminStats: () => request<AdminStats>("/admin/stats", {}, true),
+
+  getSubscription: () => request<Subscription>("/billing/subscription", {}, true),
+  listApiKeys: () =>
+    request<{ items: ApiKeyItem[] }>("/api-keys", {}, true),
+  createApiKey: (name: string) =>
+    request<ApiKeyCreated>("/api-keys", {
+      method: "POST",
+      body: JSON.stringify({ name }),
+    }, true),
+  revokeApiKey: (id: string) =>
+    request<void>(`/api-keys/${encodeURIComponent(id)}`, { method: "DELETE" }, true),
 };

@@ -11,6 +11,7 @@ from app.api.errors import ApiError
 from app.core.security import decode_token
 from app.db.session import SessionLocal
 from app.models.user import User
+from app.services.api_keys import consume_api_key
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -66,7 +67,12 @@ def get_optional_user(
     request: Request,
     db: Session = Depends(get_db),
 ) -> User | None:
-    """Attache un utilisateur si un jeton valide est fourni, sinon reste anonyme."""
+    """Attache un utilisateur depuis une clé API ou un jeton, sinon reste anonyme."""
+    raw_key = request.headers.get("x-api-key")
+    if raw_key:
+        user, _key = consume_api_key(db, raw_key)
+        return user
+
     header = request.headers.get("authorization", "")
     if not header.lower().startswith("bearer "):
         return None

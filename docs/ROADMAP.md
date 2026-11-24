@@ -56,13 +56,15 @@ Checklists détaillées : [`docs/PHASE8.md`](docs/PHASE8.md) et [`docs/SECURITE.
 
 En-têtes, CORS, limitation d'abus, journalisation sans secret, revue du stockage du jeton web, sauvegarde SQLite réelle. Limites connues documentées, jamais présentées comme terminées.
 
-## Phase 9 — Commercialisation `[ ]`
+## Phase 9 — Commercialisation `[x]`
 
-Offres FREE / PRO / BUSINESS, quotas, clés API, documentation publique, préparation paiements (sans engagement financier).
+Checklist détaillée : [`docs/PHASE9.md`](docs/PHASE9.md).
+
+Offres FREE / PRO / BUSINESS depuis une source partagée, quotas journaliers réels, clés API hachées et révocables, documentation publique. Aucun tarif inventé ni paiement actif.
 
 ## Phase 10 — Déploiement `[ ]`
 
-Hébergement, domaine, HTTPS, CI/CD, monitoring, sauvegardes, publication Android.
+Hébergement, domaine, HTTPS, CI/CD, monitoring, sauvegardes, publication Android. Préparation sans déploiement réel ni souscription.
 
 ---
 

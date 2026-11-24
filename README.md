@@ -2,7 +2,7 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 8 terminées et vérifiées. PHASE 9 — commercialisation à venir.**  
+**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 — préparation du déploiement en cours.**<br>
 Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; un modèle local Naive Bayes ajoute un signal faible et explicable, avec des métriques mesurées sur un jeu synthétique uniquement ([détails](docs/PHASE7.md)). La revue de sécurité est décrite dans [`docs/SECURITE.md`](docs/SECURITE.md), limites comprises.
 
 ---
@@ -109,4 +109,6 @@ SAFECLICK/
 - [Feuille de route](docs/ROADMAP.md)
 - [Environnement vérifié](docs/ENVIRONNEMENT.md)
 - [Sécurité et limites connues](docs/SECURITE.md)
+- [Checklist phase 8](docs/PHASE8.md)
+- [Checklist phase 9](docs/PHASE9.md)
 - [Checklist phase 1](docs/PHASE1.md)

@@ -20,6 +20,12 @@ export function Footer() {
           <Link href="/a-propos" className="hover:text-white">
             {t("about_title")}
           </Link>
+          <Link href="/offres" className="hover:text-white">
+            {t("nav_offers")}
+          </Link>
+          <Link href="/documentation" className="hover:text-white">
+            {t("nav_docs")}
+          </Link>
           <Link href="/mentions-legales" className="hover:text-white">
             {t("legal_title")}
           </Link>

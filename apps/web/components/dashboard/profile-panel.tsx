@@ -95,6 +95,13 @@ export function ProfilePanel() {
         </dl>
       ) : null}
 
+      <Link
+        href="/cles-api"
+        className="inline-block text-sm text-electric-300 hover:underline"
+      >
+        {t("nav_api_keys")}
+      </Link>
+
       <section className="rounded-2xl border border-danger-500/30 bg-danger-500/5 p-6">
         <p className="text-sm text-slate-300">{t("profile_delete_warning")}</p>
         {confirming ? (

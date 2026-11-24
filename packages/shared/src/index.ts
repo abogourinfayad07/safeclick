@@ -42,3 +42,29 @@ export const ANALYSIS_LIMITS = {
   urlMaxLength: 2048,
   messageMaxLength: 4000,
 } as const;
+
+import plansCatalog from "../plans.json";
+
+export type PlanCode = "free" | "pro" | "business";
+
+export interface PlanDefinition {
+  code: PlanCode;
+  name: string;
+  priceLabel: string;
+  dailyAnalyses: number;
+  apiKeys: number;
+  description: string;
+  features: string[];
+}
+
+export interface PlansCatalogDefinition {
+  currency: string;
+  paymentActive: boolean;
+  note: string;
+  plans: PlanDefinition[];
+}
+
+/** Source unique des offres, partagée par le site, le mobile et l'API. */
+export const PLANS = plansCatalog as PlansCatalogDefinition;
+
+export const DEFAULT_PLAN: PlanCode = "free";

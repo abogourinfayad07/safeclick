@@ -33,4 +33,13 @@ def hash_contact(value: str, kind: str) -> str:
     return hash_value(value, kind)
 
 
-__all__ = ["hash_contact", "hash_value", "normalize_contact"]
+def hash_api_key(raw_key: str) -> str:
+    """HMAC d'une clé API, sensible à la casse (pas de normalisation)."""
+    return hmac.new(
+        settings.secret_key.encode("utf-8"),
+        f"api_key:{raw_key}".encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+
+
+__all__ = ["hash_api_key", "hash_contact", "hash_value", "normalize_contact"]

@@ -16,6 +16,9 @@ const fr = {
   nav_register: "Inscription",
   nav_dashboard: "Tableau de bord",
   nav_admin: "Administration",
+  nav_offers: "Offres",
+  nav_docs: "Documentation",
+  nav_api_keys: "Clés API",
   nav_logout: "Déconnexion",
 
   common_loading: "Analyse en cours…",
@@ -145,6 +148,15 @@ const fr = {
   contact_title: "Contact",
   contact_text:
     "Aucun service d'e-mail payant n'est utilisé. En développement, les messages de vérification sont écrits dans les logs du serveur. Les canaux publics seront documentés lors du déploiement.",
+  offers_title: "Offres FREE, PRO et BUSINESS",
+  offers_text:
+    "Trois niveaux de quotas sont définis. Aucun paiement n'est actif : les offres PRO et BUSINESS restent sur devis et aucun abonnement ne peut être souscrit depuis ce site.",
+  docs_title: "Documentation API",
+  docs_text:
+    "L'API versionnée est documentée automatiquement. Les exemples ci-dessous utilisent uniquement des valeurs fictives et aucune clé réelle.",
+  keys_title: "Mes clés API",
+  keys_text:
+    "Créez une clé pour utiliser l'API depuis un outil externe. Elle est affichée une seule fois, stockée sous forme de hachage et révocable à tout moment.",
 
   footer_rights: "© 2026 SAFECLICK — Développé au Bénin pour l'Afrique francophone.",
 } as const;
@@ -162,6 +174,9 @@ const en: Dictionary = {
   nav_register: "Sign up",
   nav_dashboard: "Dashboard",
   nav_admin: "Admin",
+  nav_offers: "Plans",
+  nav_docs: "Documentation",
+  nav_api_keys: "API keys",
   nav_logout: "Log out",
   common_loading: "Analyzing…",
   common_error: "Something went wrong. Please try again.",
@@ -278,6 +293,15 @@ const en: Dictionary = {
   contact_title: "Contact",
   contact_text:
     "No paid email service is used. In development, verification messages are written to server logs. Public channels will be documented at deployment time.",
+  offers_title: "FREE, PRO and BUSINESS plans",
+  offers_text:
+    "Three quota levels are defined. No payment is active: PRO and BUSINESS remain quote-based and no subscription can be purchased from this site.",
+  docs_title: "API documentation",
+  docs_text:
+    "The versioned API is documented automatically. The examples below use fictitious values only and no real key.",
+  keys_title: "My API keys",
+  keys_text:
+    "Create a key to call the API from an external tool. It is shown once, stored as a hash and can be revoked at any time.",
   footer_rights: "© 2026 SAFECLICK — Developed in Benin for French-speaking Africa.",
 };
 

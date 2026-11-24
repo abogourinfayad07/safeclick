@@ -1,6 +1,7 @@
 """Modèles ORM SAFECLICK, importés ensemble pour Alembic."""
 
 from .analysis import Analysis
+from .api_key import ApiKey
 from .common import new_id, utcnow
 from .enums import (
     AnalysisKind,
@@ -14,6 +15,7 @@ from .user import User
 __all__ = [
     "Analysis",
     "AnalysisKind",
+    "ApiKey",
     "Report",
     "ReportContactKind",
     "ReportStatus",

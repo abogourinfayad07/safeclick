@@ -42,14 +42,21 @@ def test_alembic_creates_initial_schema(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
     inspector = inspect(create_engine(database_url))
-    assert {"users", "analyses", "reports", "alembic_version"}.issubset(
+    assert {"users", "analyses", "reports", "api_keys", "alembic_version"}.issubset(
         set(inspector.get_table_names())
     )
 
     report_columns = {column["name"] for column in inspector.get_columns("reports")}
     assert {"contact_hash", "reason_code", "status"}.issubset(report_columns)
 
+    user_columns = {column["name"] for column in inspector.get_columns("users")}
+    assert "plan" in user_columns
+
     user_indexes = {
         index["name"]: index["unique"] for index in inspector.get_indexes("users")
     }
     assert bool(user_indexes.get("ix_users_email")) is True
+    assert bool(user_indexes.get("ix_users_plan")) is False
+
+    key_columns = {column["name"] for column in inspector.get_columns("api_keys")}
+    assert {"key_hash", "daily_quota", "usage_count", "revoked_at"}.issubset(key_columns)

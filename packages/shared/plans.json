@@ -1,0 +1,49 @@
+{
+  "currency": "FCFA",
+  "paymentActive": false,
+  "note": "Aucun paiement n'est actif. Les tarifs PRO et BUSINESS seront définis avec l'utilisateur avant toute mise en vente.",
+  "plans": [
+    {
+      "code": "free",
+      "name": "FREE",
+      "priceLabel": "Gratuit",
+      "dailyAnalyses": 50,
+      "apiKeys": 1,
+      "description": "Pour le grand public et les tests.",
+      "features": [
+        "Analyse illimitée depuis le site et l'application dans la limite de quotas anti-abus",
+        "1 clé API",
+        "50 analyses par jour avec une clé API",
+        "Explications et limites affichées"
+      ]
+    },
+    {
+      "code": "pro",
+      "name": "PRO",
+      "priceLabel": "Sur devis",
+      "dailyAnalyses": 2000,
+      "apiKeys": 5,
+      "description": "Pour les petites structures et les indépendants.",
+      "features": [
+        "5 clés API",
+        "2 000 analyses par jour et par clé",
+        "Historique et statistiques",
+        "Aucun paiement activé dans cette version"
+      ]
+    },
+    {
+      "code": "business",
+      "name": "BUSINESS",
+      "priceLabel": "Sur devis",
+      "dailyAnalyses": 20000,
+      "apiKeys": 20,
+      "description": "Pour les organisations avec plusieurs équipes.",
+      "features": [
+        "20 clés API",
+        "20 000 analyses par jour et par clé",
+        "Modération et rapports dédiés à prévoir",
+        "Aucun paiement activé dans cette version"
+      ]
+    }
+  ]
+}
