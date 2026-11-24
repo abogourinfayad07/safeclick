@@ -37,7 +37,7 @@ def _save_and_build(
         indicators_json=[indicator.to_dict() for indicator in indicators],
         recommendations_json=recommendations,
         limitations_json=limitations,
-        engine_version="rules-v1",
+        engine_version=str(result.get("engine_version", "rules-v1")),
         created_at=created_at,
     )
     db.add(record)

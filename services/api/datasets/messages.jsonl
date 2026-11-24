@@ -1,0 +1,60 @@
+{"text": "URGENT : votre compte bancaire sera bloqué dans 5 minutes. Envoyez votre code OTP et votre mot de passe pour le débloquer.", "label": "phishing", "note": "Synthétique : urgence, code et mot de passe"}
+{"text": "Bonjour, nous avons détecté une connexion suspecte. Confirmez votre identité en saisissant votre mot de passe sur http://paypal.secure-verify.example.com", "label": "phishing", "note": "Synthétique : usurpation et lien suspect"}
+{"text": "Vous avez gagné 500 000 FCFA à la loterie. Envoyez vos coordonnées bancaires et payez 20 000 FCFA de frais pour recevoir votre gain.", "label": "phishing", "note": "Synthétique : gain et paiement"}
+{"text": "Votre colis est en attente. Payez 500 FCFA de frais de douane via ce lien bit.ly/colis-urgent pour éviter sa destruction.", "label": "phishing", "note": "Synthétique : urgence, paiement et raccourcisseur"}
+{"text": "Le service client Orange vous informe que votre ligne sera suspendue. Appelez ce numéro et communiquez le code reçu par SMS.", "label": "phishing", "note": "Synthétique : usurpation et code"}
+{"text": "Urgent, votre direction demande un virement immédiat sur ce RIB pour régler une facture confidentielle. Ne prévenez personne.", "label": "phishing", "note": "Synthétique : urgence et virement"}
+{"text": "Votre compte WhatsApp sera fermé. Transférez-moi le code de vérification que vous venez de recevoir pour le conserver.", "label": "phishing", "note": "Synthétique : menace et code"}
+{"text": "Offre d'emploi : 300 000 FCFA par semaine, sans expérience. Envoyez votre CV et votre IBAN par mail à recrutement@example.net", "label": "phishing", "note": "Synthétique : promesse financière et IBAN"}
+{"text": "Votre carte bancaire a été bloquée. Cliquez ici pour la débloquer et saisissez votre code secret.", "label": "phishing", "note": "Synthétique : blocage et code"}
+{"text": "Dernière chance : votre caisse d'assurance maladie va résilier votre couverture. Rendez-vous sur notre lien pour mettre à jour votre RIB.", "label": "phishing", "note": "Synthétique : urgence et RIB"}
+{"text": "Bonjour, je suis le directeur. J'ai besoin d'un virement urgent aujourd'hui, gardez cela entre nous.", "label": "phishing", "note": "Synthétique : usurpation et virement"}
+{"text": "Vous avez reçu un cadeau. Confirmez votre adresse et votre mot de passe sur ce formulaire.", "label": "phishing", "note": "Synthétique : appât et mot de passe"}
+{"text": "Votre facture d'électricité est impayée, payez immédiatement par carte cadeau sinon coupure.", "label": "phishing", "note": "Synthétique : urgence et carte cadeau"}
+{"text": "Nous avons besoin de votre code OTP pour valider votre remboursement exceptionnel. Répondez par mail immédiatement.", "label": "phishing", "note": "Synthétique : code et contact privé"}
+{"text": "Votre compte sera supprimé dans 10 minutes si vous ne cliquez pas sur ce lien.", "label": "phishing", "note": "Synthétique : délai court et lien"}
+{"text": "Envoyez de l'argent via mandat cash à ce numéro pour débloquer votre prime de fin d'année.", "label": "phishing", "note": "Synthétique : mandat cash et prime"}
+{"text": "Bonjour, votre banque a détecté une fraude. Donnez-moi votre code de vérification par téléphone pour l'arrêter.", "label": "phishing", "note": "Synthétique : usurpation et code"}
+{"text": "Promotion exceptionnelle : recevez 1 000 000 FCFA en 24 heures, sans frais, par virement.", "label": "phishing", "note": "Synthétique : gain exceptionnel"}
+{"text": "Votre inscription au concours est confirmée. Payez 10 000 FCFA pour recevoir votre prix.", "label": "phishing", "note": "Synthétique : prix et paiement"}
+{"text": "URGENT!!! Votre compte sera bloqué. Envoyez votre code OTP et votre mot de passe immédiatement.", "label": "phishing", "note": "Synthétique : urgence, blocage et code"}
+{"text": "Cliquez sur ce lien pour vérifier votre adresse e-mail et saisissez votre mot de passe.", "label": "phishing", "note": "Synthétique : lien et mot de passe"}
+{"text": "Je vous envoie un chèque, mais j'ai besoin de votre RIB et d'une avance de 50 000 FCFA pour le débloquer.", "label": "phishing", "note": "Synthétique : RIB et avance"}
+{"text": "Votre profil Facebook sera désactivé. Connectez-vous sur facebook.secure-login.example.com pour le garder actif.", "label": "phishing", "note": "Synthétique : marque et domaine trompeur"}
+{"text": "Votre abonnement SNCF expire aujourd'hui, payez par carte bancaire sur ce raccourcisseur pour le renouveler.", "label": "phishing", "note": "Synthétique : marque et paiement"}
+{"text": "Suite à un problème technique, envoyez votre identifiant et votre mot de passe à notre administrateur par mail.", "label": "phishing", "note": "Synthétique : administrateur et identifiants"}
+{"text": "Vous avez été sélectionné pour un stage rémunéré. Envoyez votre IBAN et une copie de votre carte d'identité.", "label": "phishing", "note": "Synthétique : offre alléchante et IBAN"}
+{"text": "Votre compte est suspendu, appelez immédiatement ce numéro et dictez le code reçu par SMS.", "label": "phishing", "note": "Synthétique : suspension et code"}
+{"text": "Gagnez un téléphone gratuitement, cliquez ici et payez seulement les frais de livraison par virement.", "label": "phishing", "note": "Synthétique : gain et virement"}
+{"text": "Attention, votre impôt doit être payé maintenant. Utilisez ce RIB pour éviter une pénalité.", "label": "phishing", "note": "Synthétique : urgence et RIB"}
+{"text": "Bonjour, je suis un ami en difficulté, envoyez-moi de l'argent par mandat cash, je vous rembourse demain.", "label": "phishing", "note": "Synthétique : usurpation et mandat cash"}
+{"text": "Bonjour, voici le document dont on a parlé ce matin. À bientôt.", "label": "legitimate", "note": "Synthétique : message professionnel simple"}
+{"text": "Réunion d'équipe prévue demain à 10h dans la salle conférence. Merci de confirmer votre présence.", "label": "legitimate", "note": "Synthétique : réunion interne"}
+{"text": "Votre commande a été expédiée, vous recevrez le suivi par e-mail dans la journée.", "label": "legitimate", "note": "Synthétique : suivi de commande"}
+{"text": "Peux-tu me dire à quelle heure tu arrives ce soir ? On dînera ensemble.", "label": "legitimate", "note": "Synthétique : message personnel"}
+{"text": "Le rapport mensuel est prêt, je te l'envoie demain matin.", "label": "legitimate", "note": "Synthétique : travail courant"}
+{"text": "Merci pour votre message. Je vous répondrai après la réunion.", "label": "legitimate", "note": "Synthétique : réponse polie"}
+{"text": "Votre rendez-vous chez le médecin est confirmé pour jeudi à 9h.", "label": "legitimate", "note": "Synthétique : confirmation de rendez-vous"}
+{"text": "J'ai ajouté les photos de vacances dans l'album partagé.", "label": "legitimate", "note": "Synthétique : partage de photos"}
+{"text": "Petit rappel : la réunion a été déplacée à 15h. Bonne journée.", "label": "legitimate", "note": "Synthétique : rappel d'horaire"}
+{"text": "Voici le lien du document de travail, dis-moi si tu as des questions.", "label": "legitimate", "note": "Synthétique : lien de document interne"}
+{"text": "La livraison est prévue mercredi entre 9h et 12h.", "label": "legitimate", "note": "Synthétique : livraison"}
+{"text": "Bon anniversaire ! J'espère que tu passes une bonne journée.", "label": "legitimate", "note": "Synthétique : message personnel"}
+{"text": "Je te renvoie le devis corrigé, le total est de 150 000 FCFA.", "label": "legitimate", "note": "Synthétique : devis professionnel"}
+{"text": "On se retrouve au café habituel à 18h, si ça te convient.", "label": "legitimate", "note": "Synthétique : rendez-vous personnel"}
+{"text": "Le cours de demain commence à 8h, n'oublie pas ton ordinateur.", "label": "legitimate", "note": "Synthétique : rappel de cours"}
+{"text": "Merci de valider les congés dans l'application avant vendredi.", "label": "legitimate", "note": "Synthétique : procédure interne"}
+{"text": "Votre facture du mois est disponible dans votre espace client.", "label": "legitimate", "note": "Synthétique : facturation"}
+{"text": "J'ai bien reçu ton message, je regarde ça et je te dis.", "label": "legitimate", "note": "Synthétique : accusé de réception"}
+{"text": "La bibliothèque est ouverte jusqu'à 18h pendant les vacances.", "label": "legitimate", "note": "Synthétique : horaires"}
+{"text": "Voici les notes de la réunion, merci de les compléter.", "label": "legitimate", "note": "Synthétique : compte rendu"}
+{"text": "Le train part à 7h30, on se retrouve en gare à 7h.", "label": "legitimate", "note": "Synthétique : voyage"}
+{"text": "Je vais passer te voir samedi, dis-moi si tu es disponible.", "label": "legitimate", "note": "Synthétique : visite"}
+{"text": "Votre abonnement a bien été renouvelé, merci de votre confiance.", "label": "legitimate", "note": "Synthétique : renouvellement"}
+{"text": "Le nouveau numéro de téléphone du bureau est le 01 23 45 67 89.", "label": "legitimate", "note": "Synthétique : information de contact"}
+{"text": "J'ai envoyé le dossier par courrier, tu devrais le recevoir lundi.", "label": "legitimate", "note": "Synthétique : envoi postal"}
+{"text": "N'oublie pas d'emporter ton passeport pour le voyage.", "label": "legitimate", "note": "Synthétique : rappel de voyage"}
+{"text": "La formation aura lieu en ligne, le lien sera envoyé la veille.", "label": "legitimate", "note": "Synthétique : formation"}
+{"text": "Merci de confirmer la réception de ce message.", "label": "legitimate", "note": "Synthétique : confirmation"}
+{"text": "Nous avons bien pris en compte votre demande de devis.", "label": "legitimate", "note": "Synthétique : service client"}
+{"text": "Rendez-vous demain à la même heure pour avancer sur le projet.", "label": "legitimate", "note": "Synthétique : suivi de projet"}

@@ -44,9 +44,11 @@ Checklist détaillée : [`docs/PHASE6.md`](docs/PHASE6.md).
 
 Navigation Expo, auth, analyse, signalement, historique, profil, paramètres, connexion à la même API, jeton dans le coffre sécurisé.
 
-## Phase 7 — Intelligence artificielle `[ ]`
+## Phase 7 — Intelligence artificielle `[x]`
 
-Jeu de données étiqueté et vérifié, entraînement scikit-learn, évaluation mesurée, réduction des faux positifs/négatifs. Aucune performance annoncée sans mesure.
+Checklist détaillée : [`docs/PHASE7.md`](docs/PHASE7.md).
+
+Jeu synthétique étiqueté (60 messages), Naive Bayes local en Python pur, évaluation mesurée sur 12 exemples de test, signal statistique faible et explicable intégré au moteur de règles. Aucune performance annoncée sans mesure.
 
 ## Phase 8 — Sécurité `[ ]`
 

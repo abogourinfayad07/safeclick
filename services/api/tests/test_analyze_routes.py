@@ -46,6 +46,13 @@ def test_analyze_message_route_returns_explanations(client: TestClient) -> None:
     assert all("detail" in item for item in body["indicators"])
     assert body["limitations"]
 
+    with SessionLocal() as db:
+        stored = db.scalar(
+            select(Analysis).where(Analysis.input_hash == hash_value(message, "analysis"))
+        )
+        assert stored is not None
+        assert stored.engine_version == "rules-v1+nb-fr-v1"
+
 
 def test_analysis_input_is_strictly_validated(client: TestClient) -> None:
     response = client.post(

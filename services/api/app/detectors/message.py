@@ -3,6 +3,7 @@
 import re
 
 from app.models.enums import AnalysisKind
+from app.ml.model_store import load_model, model_version
 
 from .indicators import Indicator
 from .scoring import classify, limitations, recommendations, score_from_indicators
@@ -93,11 +94,37 @@ _RULES: tuple[tuple[str, str, str, int, re.Pattern[str]], ...] = (
     ),
 )
 
+_ML_MARGIN_THRESHOLD = 1.0
+
+
+def _ml_indicator(text: str) -> Indicator | None:
+    """Signal statistique faible, ajouté aux seules règles explicables."""
+    try:
+        model = load_model()
+    except (OSError, ValueError, KeyError):
+        return None
+    if model.phishing_margin(text) <= _ML_MARGIN_THRESHOLD:
+        return None
+    return Indicator(
+        code="ml_statistical_signal",
+        label="Signal statistique local",
+        detail=(
+            "Le modèle local, entraîné sur un petit jeu synthétique, rapproche ce texte "
+            "de messages de phishing. Ce signal reste indicatif."
+        ),
+        weight=5,
+    )
+
 
 def analyze_message(raw: str) -> dict[str, object]:
     """Évalue un texte sans interpréter l'expéditeur ni joindre de service externe."""
     text = raw.strip()
     indicators: list[Indicator] = []
+    engine_version = "rules-v1"
+    try:
+        engine_version = f"rules-v1+{model_version()}"
+    except (OSError, ValueError, KeyError):
+        pass
 
     for code, label, detail, weight, pattern in _RULES:
         if pattern.search(text):
@@ -128,13 +155,23 @@ def analyze_message(raw: str) -> dict[str, object]:
             )
         )
 
+    ml_signal = _ml_indicator(text)
+    if ml_signal is not None:
+        indicators.append(ml_signal)
+
     score = score_from_indicators(indicators)
     level = classify(score)
+    result_limitations = limitations("message")
+    if ml_signal is not None:
+        result_limitations.append(
+            "Le signal statistique vient d'un modèle local entraîné sur 60 exemples synthétiques ; il n'a pas de valeur de preuve."
+        )
     return {
         "kind": AnalysisKind.MESSAGE,
         "risk_level": level,
         "score": score,
         "indicators": indicators,
         "recommendations": recommendations(level),
-        "limitations": limitations("message"),
+        "limitations": result_limitations,
+        "engine_version": engine_version,
     }

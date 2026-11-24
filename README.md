@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 6 terminées et vérifiées. PHASE 7 — intelligence artificielle à venir.**  
-Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; l'IA sera ajoutée avec une évaluation mesurée, jamais annoncée sans mesure.
+**Statut : PHASES 1 à 7 terminées et vérifiées. PHASE 8 — sécurité à venir.**  
+Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; un modèle local Naive Bayes ajoute un signal faible et explicable, avec des métriques mesurées sur un jeu synthétique uniquement ([détails](docs/PHASE7.md)).
 
 ---
 
@@ -59,8 +59,9 @@ npm run api:migrate
 npm run web:dev
 npm run api:dev
 
-# Tests API
+# Tests API et réentraînement du modèle local
 npm run api:test
+npm run ml:train
 ```
 
 > Les commandes ci-dessus ont été exécutées sur l'environnement Windows décrit plus haut. `npm run api:test` utilise directement le venv `.venv`, sans activation manuelle.

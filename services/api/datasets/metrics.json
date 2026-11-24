@@ -1,0 +1,14 @@
+{
+  "model_version": "nb-fr-v1",
+  "note": "Jeu synthétique français. Métriques calculées, non estimées.",
+  "metrics": {
+    "tp": 6,
+    "fp": 0,
+    "tn": 6,
+    "fn": 0,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  }
+}
