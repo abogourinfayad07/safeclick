@@ -32,9 +32,11 @@ Checklist détaillée : [`docs/PHASE4.md`](docs/PHASE4.md).
 
 Inscription, connexion, vérification e-mail (mode `console` en dev), réinitialisation, profil, sessions, historique, suppression de compte, confidentialité.
 
-## Phase 5 — Interface web `[ ]`
+## Phase 5 — Interface web `[x]`
 
-15 pages, tableau de bord, graphiques, espace admin, i18n FR prêt pour l'anglais.
+Checklist détaillée : [`docs/PHASE5.md`](docs/PHASE5.md).
+
+17 routes Next.js, tableau de bord, graphiques de répartition réels, espace admin de modération, i18n FR avec dictionnaire anglais complet.
 
 ## Phase 6 — Application Android `[ ]`
 

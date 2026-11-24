@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.errors import register_error_handlers
-from app.api.routes import analyze, auth, health, meta, reports, users
+from app.api.routes import admin, analyze, auth, health, history, meta, reports, users
 from app.core.config import settings
 from app.core.version import API_VERSION
 
@@ -32,6 +32,8 @@ app.include_router(reports.router)
 app.include_router(analyze.router)
 app.include_router(auth.router)
 app.include_router(users.router)
+app.include_router(history.router)
+app.include_router(admin.router)
 
 
 @app.get("/", include_in_schema=False)

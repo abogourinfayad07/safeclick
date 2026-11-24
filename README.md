@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 4 terminées et vérifiées. PHASE 5 — interface web en cours.**  
-Le moteur de détection est exposé via `/api/v1/analyze/url` et `/api/v1/analyze/message`. Il est purement passif : aucun lien n'est visité par le serveur. L'authentification Argon2id + JWT est opérationnelle en mode vérification console.
+**Statut : PHASES 1 à 5 terminées et vérifiées. PHASE 6 — application Android en cours.**  
+Le site web est connecté à l'API : analyse, signalement, comptes, historique et modération. Le moteur reste passif : aucun lien n'est visité par le serveur. L'interface est en français avec une structure i18n prête pour l'anglais.
 
 ---
 
