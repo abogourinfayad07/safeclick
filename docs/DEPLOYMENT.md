@@ -6,9 +6,9 @@ Ce document décrit ce qui est **prêt dans le dépôt** et ce qui reste à fair
 
 | Élément | Fichier | État |
 |---|---|---|
-| Tests, typecheck, build, audit | `.github/workflows/ci.yml` | Prêt à s'exécuter au premier push |
+| Tests, typecheck, build, audit | `.github/workflows/ci.yml` | Exécuté avec succès, run #1 |
 | Vérification Expo + export Android | `.github/workflows/ci.yml` | Prête |
-| Validation et build Docker | `.github/workflows/ci.yml` | Prête ; non exécutée localement (Docker absent) |
+| Validation et build Docker | `.github/workflows/ci.yml` | Validée en CI : compose + build des deux images |
 | Image API | `services/api/Dockerfile` | Prête |
 | Image web | `apps/web/Dockerfile` | Prête, sortie Next standalone |
 | Composition des services | `docker-compose.yml` | Prête ; PostgreSQL + API + web, Redis optionnel |

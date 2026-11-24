@@ -2,7 +2,7 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 préparée : déploiement réel, domaine, HTTPS et publication Android en attente d'accord.**<br>
+**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 préparée : CI GitHub verte ; déploiement réel, domaine, HTTPS et publication Android en attente d'accord.**<br>
 Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; un modèle local Naive Bayes ajoute un signal faible et explicable, avec des métriques mesurées sur un jeu synthétique uniquement ([détails](docs/PHASE7.md)). La revue de sécurité est décrite dans [`docs/SECURITE.md`](docs/SECURITE.md), limites comprises.
 
 ---

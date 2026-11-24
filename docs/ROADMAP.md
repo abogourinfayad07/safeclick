@@ -66,7 +66,7 @@ Offres FREE / PRO / BUSINESS depuis une source partagée, quotas journaliers ré
 
 Checklist détaillée : [`docs/PHASE10.md`](docs/PHASE10.md) et [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-CI, Docker Compose, pré-vérification et documentation prêts. Hébergement, domaine, HTTPS, monitoring et publication Android restent des actions manuelles : aucun déploiement ni abonnement effectué.
+CI GitHub exécutée avec succès (run #1), Docker Compose, pré-vérification et documentation prêts. Hébergement, domaine, HTTPS, monitoring et publication Android restent des actions manuelles : aucun déploiement ni abonnement effectué.
 
 ---
 

@@ -4,7 +4,7 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Étape 1 — Intégration continue `[x]`
 
-- [x] Workflow `.github/workflows/ci.yml` sur `push` et `pull_request` vers `main`
+- [x] Workflow `.github/workflows/ci.yml` sur `push` et `pull_request` vers `main` — exécuté avec succès au premier push (run #1)
 - [x] Un seul job de vérifications reproductibles : tests API, typecheck, build web, audit npm, Expo Doctor, export Android
 - [x] Job séparé de validation Docker : `docker compose config` puis build des deux images
 - [x] Permissions GitHub limitées à `contents: read`
@@ -18,6 +18,7 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 - [x] Volume PostgreSQL nommé, démarrage de l'API après le healthcheck de la base
 - [x] Migrations Alembic exécutées au démarrage de l'API
 - [x] `.dockerignore` exclut `.env`, bases locales, caches et artefacts natives
+- [x] Validation du compose et build des deux images réussis dans le job CI `Validation Docker`
 
 ## Étape 3 — Pré-vérification `[x]`
 
@@ -35,7 +36,7 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Étape 5 — Actions réelles encore en attente `[ ]`
 
-- [ ] Premier `push` exécutant le workflow GitHub Actions
+- [x] Premier `push` exécutant le workflow GitHub Actions — run #1 vert
 - [ ] Création du dépôt distant et des secrets GitHub par le propriétaire
 - [ ] Choix et achat du domaine, configuration DNS
 - [ ] Terminaison TLS/HTTPS par le reverse proxy ou l'hébergeur
@@ -53,5 +54,6 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 - [x] `npm run mobile:export` → bundle Android généré
 - [x] `python scripts/preflight.py --mode local` → OK
 - [x] `npm audit --audit-level=moderate` → 0 vulnérabilité
+- [x] CI GitHub run #1 → **success** : `Tests, typecheck, build et audit` et `Validation Docker` verts
 
-> Docker est absent de la machine locale : les images ne sont pas construites ici. Le workflow CI les construira au premier push. Aucun déploiement réel n'est effectué dans cette phase.
+> Docker est absent de la machine locale, mais le job CI `Validation Docker` a validé le compose et construit les deux images avec succès. Le run #2, déclenché par un commit vide de relance, est redondant. Aucun déploiement réel n'est effectué dans cette phase.
