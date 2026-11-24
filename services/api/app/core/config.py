@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     )
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
+    # Limitation en mémoire, suffisante pour une instance. Mettre à false uniquement
+    # dans des tests isolés ou derrière un proxy applicatif dédié.
+    rate_limit_enabled: bool = True
     rate_limit_per_minute: int = 60
 
     @property

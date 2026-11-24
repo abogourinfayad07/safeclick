@@ -5,6 +5,9 @@ import os
 # Ces valeurs doivent être posées avant l'import de app.main.
 os.environ.setdefault("ENVIRONMENT", "test")
 os.environ.setdefault("DATABASE_URL", "sqlite:///:memory:")
+# Les tests fonctionnels gardent la limitation désactivée ; test_security.py
+# l'active explicitement sur un compteur dédié.
+os.environ.setdefault("RATE_LIMIT_ENABLED", "false")
 os.environ.setdefault(
     "SECRET_KEY", "test-only-placeholder-key-longer-than-thirty-two-bytes"
 )

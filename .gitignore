@@ -38,6 +38,7 @@ htmlcov/
 
 # ---------- Données locales ----------
 data/
+backups/
 *.db
 *.sqlite
 *.sqlite3

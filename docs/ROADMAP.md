@@ -50,9 +50,11 @@ Checklist détaillée : [`docs/PHASE7.md`](docs/PHASE7.md).
 
 Jeu synthétique étiqueté (60 messages), Naive Bayes local en Python pur, évaluation mesurée sur 12 exemples de test, signal statistique faible et explicable intégré au moteur de règles. Aucune performance annoncée sans mesure.
 
-## Phase 8 — Sécurité `[ ]`
+## Phase 8 — Sécurité `[x]`
 
-Audit des entrées, SSRF, abus API, permissions, journalisation sécurisée, sauvegardes, tests.
+Checklists détaillées : [`docs/PHASE8.md`](docs/PHASE8.md) et [`docs/SECURITE.md`](docs/SECURITE.md).
+
+En-têtes, CORS, limitation d'abus, journalisation sans secret, revue du stockage du jeton web, sauvegarde SQLite réelle. Limites connues documentées, jamais présentées comme terminées.
 
 ## Phase 9 — Commercialisation `[ ]`
 

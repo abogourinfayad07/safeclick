@@ -29,7 +29,7 @@ class ApiError(Exception):
         super().__init__(message)
 
 
-def _json_error(
+def json_error(
     status_code: int,
     code: str,
     message: str,
@@ -37,6 +37,10 @@ def _json_error(
 ) -> JSONResponse:
     payload = ErrorResponse(code=code, message=message, details=details)
     return JSONResponse(status_code=status_code, content=payload.model_dump())
+
+
+# Ancien nom interne conservé pour ne pas casser les imports existants.
+_json_error = json_error
 
 
 async def api_error_handler(_request: Request, exc: ApiError) -> JSONResponse:

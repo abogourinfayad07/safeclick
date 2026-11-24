@@ -23,6 +23,7 @@
     "api:migrate": ".\\.venv\\Scripts\\python -m alembic -c services/api/alembic.ini upgrade head",
     "api:test": ".\\.venv\\Scripts\\python -m pytest services/api/tests -v",
     "ml:train": "set PYTHONPATH=services/api&& .\\.venv\\Scripts\\python -m app.ml.train",
+    "db:backup": "set PYTHONPATH=services/api&& .\\.venv\\Scripts\\python -m app.ops.backup",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "license": "UNLICENSED"

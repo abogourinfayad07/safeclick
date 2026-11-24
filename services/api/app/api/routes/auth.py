@@ -50,7 +50,7 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)) -> Registe
     db.refresh(user)
 
     verification_token = create_verification_token(user.id)
-    if settings.email_backend == "console":
+    if settings.email_backend == "console" and settings.is_development:
         logger.info(
             "Vérification SAFECLICK (développement) : %s/api/v1/auth/verify",
             settings.site_url,
