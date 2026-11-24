@@ -2,24 +2,44 @@ import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ANALYSIS_LIMITS } from "@safeclick/shared";
+import { ANALYSIS_LIMITS, type AnalysisResult } from "@safeclick/shared";
+import { AnalysisResultCard } from "@/components/analysis-result";
+import { ErrorText, PrimaryButton } from "@/components/ui";
 import { COLORS } from "@/constants/theme";
+import { api, errorMessage } from "@/lib/api";
 
 export default function AnalyzeScreen() {
   const { kind } = useLocalSearchParams<{ kind?: string }>();
   const isUrl = kind !== "message";
   const [value, setValue] = useState("");
+  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const limit = isUrl ? ANALYSIS_LIMITS.urlMaxLength : ANALYSIS_LIMITS.messageMaxLength;
+
+  async function analyze() {
+    setError("");
+    setResult(null);
+    setLoading(true);
+    try {
+      const data = isUrl ? await api.analyzeUrl(value) : await api.analyzeMessage(value);
+      setResult(data);
+    } catch (cause) {
+      setError(errorMessage(cause));
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.safe} edges={["top"]}>
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <Text style={styles.title}>
           {isUrl ? "Analyser un lien" : "Analyser un message"}
         </Text>
         <Text style={styles.subtitle}>
           {isUrl
-            ? "Collez l’URL à vérifier. Le serveur ne l’ouvrira pas."
+            ? "Collez l'URL à vérifier. Le serveur ne l'ouvrira pas."
             : "Collez le SMS ou le message WhatsApp suspect."}
         </Text>
 
@@ -35,13 +55,18 @@ export default function AnalyzeScreen() {
           autoCorrect={false}
         />
 
-        <View style={styles.disabledButton}>
-          <Text style={styles.disabledText}>Analyse — connexion API en phase 6</Text>
-        </View>
+        <PrimaryButton
+          label={loading ? "Analyse en cours…" : "Analyser"}
+          onPress={() => void analyze()}
+          disabled={loading || value.trim().length < 3}
+        />
+        <ErrorText message={error} />
+
+        {result ? <AnalysisResultCard result={result} /> : null}
 
         <Text style={styles.note}>
-          Longueur maximale : {limit} caractères. Aucune analyse n’est effectuée tant que
-          l’API n’est pas connectée : aucun résultat fictif n’est affiché.
+          Longueur maximale : {limit} caractères. Analyse passive : aucun lien n'est visité
+          par le serveur.
         </Text>
       </ScrollView>
     </SafeAreaView>
@@ -64,13 +89,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 14,
   },
-  disabledButton: {
-    backgroundColor: "rgba(255,255,255,0.06)",
-    borderRadius: 12,
-    padding: 14,
-    marginTop: 14,
-    alignItems: "center",
-  },
-  disabledText: { color: COLORS.muted, fontSize: 14, fontWeight: "600" },
   note: { color: COLORS.muted, fontSize: 12, lineHeight: 18, marginTop: 24 },
 });

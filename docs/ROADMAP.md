@@ -38,9 +38,11 @@ Checklist détaillée : [`docs/PHASE5.md`](docs/PHASE5.md).
 
 17 routes Next.js, tableau de bord, graphiques de répartition réels, espace admin de modération, i18n FR avec dictionnaire anglais complet.
 
-## Phase 6 — Application Android `[ ]`
+## Phase 6 — Application Android `[x]`
 
-Navigation Expo, auth, analyse, historique, notifications, profil, paramètres, connexion à la même API.
+Checklist détaillée : [`docs/PHASE6.md`](docs/PHASE6.md).
+
+Navigation Expo, auth, analyse, signalement, historique, profil, paramètres, connexion à la même API, jeton dans le coffre sécurisé.
 
 ## Phase 7 — Intelligence artificielle `[ ]`
 

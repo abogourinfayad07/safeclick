@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 5 terminées et vérifiées. PHASE 6 — application Android en cours.**  
-Le site web est connecté à l'API : analyse, signalement, comptes, historique et modération. Le moteur reste passif : aucun lien n'est visité par le serveur. L'interface est en français avec une structure i18n prête pour l'anglais.
+**Statut : PHASES 1 à 6 terminées et vérifiées. PHASE 7 — intelligence artificielle à venir.**  
+Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; l'IA sera ajoutée avec une évaluation mesurée, jamais annoncée sans mesure.
 
 ---
 

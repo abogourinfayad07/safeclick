@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RISK_LABELS } from "@safeclick/shared";
+import { Card } from "@/components/ui";
 import { COLORS } from "@/constants/theme";
 
 export default function HomeScreen() {
@@ -24,7 +25,14 @@ export default function HomeScreen() {
         <Link href={{ pathname: "/analyze", params: { kind: "message" } }} style={styles.card}>
           <Text style={styles.cardTitle}>Analyser un message</Text>
           <Text style={styles.cardText}>
-            Urgence, demande d’argent, codes et usurpation d’identité.
+            Urgence, demande d'argent, codes et usurpation d'identité.
+          </Text>
+        </Link>
+
+        <Link href="/report" style={styles.card}>
+          <Text style={styles.cardTitle}>Signaler un contact</Text>
+          <Text style={styles.cardText}>
+            Contact haché, statut non vérifié, aucune accusation automatique.
           </Text>
         </Link>
 
@@ -34,13 +42,18 @@ export default function HomeScreen() {
           <Text style={styles.level}>{RISK_LABELS.medium}</Text>
           <Text style={styles.level}>{RISK_LABELS.high}</Text>
           <Text style={styles.disclaimer}>
-            Un risque faible n’est jamais une garantie de sécurité.
+            Un risque faible n'est jamais une garantie de sécurité.
           </Text>
         </View>
 
-        <Text style={styles.note}>
-          Navigation fonctionnelle. L’appel à l’API sera branché en phase 6, une fois le backend créé.
-        </Text>
+        <Card>
+          <Text style={styles.cardTitle}>Votre espace</Text>
+          <Link href="/login" style={styles.link}>Connexion</Link>
+          <Link href="/register" style={styles.link}>Créer un compte</Link>
+          <Link href="/history" style={styles.link}>Historique</Link>
+          <Link href="/profile" style={styles.link}>Profil</Link>
+          <Link href="/settings" style={styles.link}>Paramètres</Link>
+        </Card>
       </ScrollView>
     </SafeAreaView>
   );
@@ -66,5 +79,5 @@ const styles = StyleSheet.create({
   levelsTitle: { color: COLORS.text, fontSize: 17, fontWeight: "700", marginBottom: 10 },
   level: { color: COLORS.text, fontSize: 14, paddingVertical: 3 },
   disclaimer: { color: COLORS.muted, fontSize: 12, marginTop: 10 },
-  note: { color: COLORS.muted, fontSize: 12, lineHeight: 18, marginTop: 28 },
+  link: { color: COLORS.electric, fontSize: 13, marginTop: 12 },
 });
