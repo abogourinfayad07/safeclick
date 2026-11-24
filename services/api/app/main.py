@@ -3,12 +3,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import health
+from app.api.errors import register_error_handlers
+from app.api.routes import health, meta
 from app.core.config import settings
+from app.core.version import API_VERSION
 
 app = FastAPI(
     title="SAFECLICK API",
-    version="0.1.0",
+    version=API_VERSION,
     description="API publique de détection des arnaques numériques.",
 )
 
@@ -21,14 +23,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+register_error_handlers(app)
+
 app.include_router(health.router)
+app.include_router(health.v1_router)
+app.include_router(meta.router)
 
 
 @app.get("/", include_in_schema=False)
 def root() -> dict[str, str]:
     return {
         "name": "SAFECLICK API",
-        "version": "0.1.0",
+        "version": API_VERSION,
         "docs": "/docs",
         "prefix": settings.api_v1_prefix,
     }

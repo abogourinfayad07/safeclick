@@ -1,4 +1,4 @@
-"""Endpoint de santé : vérifie le service et la connexion à la base."""
+"""Endpoints de santé : service et connexion à la base, en v1 et sans préfixe."""
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import text
@@ -7,19 +7,18 @@ from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
 from app.core.config import settings
+from app.core.version import API_VERSION
 from app.schemas.health import HealthResponse
 
 router = APIRouter(tags=["health"])
+v1_router = APIRouter(prefix=settings.api_v1_prefix, tags=["health"])
 
-API_VERSION = "0.1.0"
 
-
-@router.get("/health", response_model=HealthResponse)
-def health(db: Session = Depends(get_db)) -> HealthResponse:
+def _health_payload(db: Session) -> HealthResponse:
     try:
         db.execute(text("SELECT 1"))
     except SQLAlchemyError as exc:
-        # On ne renvoie aucun détail technique au client.
+        # Aucun détail technique n'est renvoyé au client.
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database unavailable",
@@ -31,3 +30,15 @@ def health(db: Session = Depends(get_db)) -> HealthResponse:
         environment=settings.environment,
         version=API_VERSION,
     )
+
+
+@router.get("/health", response_model=HealthResponse, operation_id="health_check")
+def health(db: Session = Depends(get_db)) -> HealthResponse:
+    return _health_payload(db)
+
+
+@v1_router.get(
+    "/health", response_model=HealthResponse, operation_id="health_check_v1"
+)
+def health_v1(db: Session = Depends(get_db)) -> HealthResponse:
+    return _health_payload(db)

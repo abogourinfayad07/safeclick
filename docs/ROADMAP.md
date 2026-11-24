@@ -15,9 +15,10 @@ Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 - [x] Initialisation `services/api` (FastAPI + SQLAlchemy + requirements + tests smoke)
 - [x] Vérification : `npm run typecheck`, `npm run web:build`, `npm run api:test`, `expo-doctor`, `npm audit`, commit
 
-## Phase 2 — Backend `[ ]`
+## Phase 2 — Backend `[~]`
 
-Modèles, migrations Alembic, validation Pydantic, gestion d'erreurs, endpoints `/health`, `/api/v1/...`, tests.
+Modèles, migrations Alembic, validation Pydantic, gestion d'erreurs, endpoints `/api/v1/...`, tests.  
+Checklist détaillée : [`docs/PHASE2.md`](docs/PHASE2.md).
 
 ## Phase 3 — Moteur d'analyse `[ ]`
 
