@@ -62,9 +62,11 @@ Checklist détaillée : [`docs/PHASE9.md`](docs/PHASE9.md).
 
 Offres FREE / PRO / BUSINESS depuis une source partagée, quotas journaliers réels, clés API hachées et révocables, documentation publique. Aucun tarif inventé ni paiement actif.
 
-## Phase 10 — Déploiement `[ ]`
+## Phase 10 — Déploiement `[~]`
 
-Hébergement, domaine, HTTPS, CI/CD, monitoring, sauvegardes, publication Android. Préparation sans déploiement réel ni souscription.
+Checklist détaillée : [`docs/PHASE10.md`](docs/PHASE10.md) et [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+CI, Docker Compose, pré-vérification et documentation prêts. Hébergement, domaine, HTTPS, monitoring et publication Android restent des actions manuelles : aucun déploiement ni abonnement effectué.
 
 ---
 

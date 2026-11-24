@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "doctor": "expo-doctor"
+    "doctor": "expo-doctor",
+    "export": "expo export --platform android --clear"
   },
   "dependencies": {
     "@expo/log-box": "58.0.15",

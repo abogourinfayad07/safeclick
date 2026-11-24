@@ -2,7 +2,7 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 — préparation du déploiement en cours.**<br>
+**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 préparée : déploiement réel, domaine, HTTPS et publication Android en attente d'accord.**<br>
 Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; un modèle local Naive Bayes ajoute un signal faible et explicable, avec des métriques mesurées sur un jeu synthétique uniquement ([détails](docs/PHASE7.md)). La revue de sécurité est décrite dans [`docs/SECURITE.md`](docs/SECURITE.md), limites comprises.
 
 ---
@@ -63,6 +63,11 @@ npm run api:dev
 npm run api:test
 npm run ml:train
 npm run db:backup
+
+# Vérification complète avant déploiement
+npm run deploy:preflight
+npm run mobile:doctor
+npm run mobile:export
 ```
 
 > Les commandes ci-dessus ont été exécutées sur l'environnement Windows décrit plus haut. `npm run api:test` utilise directement le venv `.venv`, sans activation manuelle.
@@ -79,12 +84,14 @@ SAFECLICK/
 ├── services/
 │   └── api/
 │       ├── app/{api,core,models,schemas,services,detectors,workers}/
-│       └── tests/
-├── packages/shared/  # types et contrats communs
-├── infrastructure/   # Docker, déploiement
-├── docs/             # architecture, décisions, roadmap
+│       ├── tests/
+│       └── Dockerfile
+├── packages/shared/  # types et contrats communs, dont plans.json
+├── scripts/          # pré-vérification avant déploiement
+├── .github/workflows/# CI
+├── docs/             # architecture, décisions, roadmap, déploiement
 ├── .env.example
-├── .gitignore
+├── .dockerignore
 ├── docker-compose.yml
 └── README.md
 ```
@@ -111,4 +118,6 @@ SAFECLICK/
 - [Sécurité et limites connues](docs/SECURITE.md)
 - [Checklist phase 8](docs/PHASE8.md)
 - [Checklist phase 9](docs/PHASE9.md)
+- [Checklist phase 10](docs/PHASE10.md)
+- [Préparation du déploiement](docs/DEPLOYMENT.md)
 - [Checklist phase 1](docs/PHASE1.md)

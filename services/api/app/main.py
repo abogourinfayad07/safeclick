@@ -32,7 +32,7 @@ app.add_middleware(
     allow_origins=[settings.site_url],
     allow_credentials=True,
     allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_headers=["Authorization", "Content-Type", "X-API-Key"],
 )
 
 register_middlewares(app)

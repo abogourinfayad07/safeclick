@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Tests, typecheck, build et audit
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Récupération du dépôt
+        uses: actions/checkout@v4
+
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.15"
+          cache: pip
+          cache-dependency-path: services/api/requirements-dev.txt
+
+      - name: Dépendances JavaScript
+        run: npm ci
+
+      - name: Environnement Python
+        run: |
+          python -m venv .venv
+          .\.venv\Scripts\python -m pip install --upgrade pip
+          .\.venv\Scripts\python -m pip install -r services\api\requirements-dev.txt
+
+      - name: Pré-vérification locale
+        run: python scripts/preflight.py --mode local
+
+      - name: Vérification Expo
+        run: |
+          npm run mobile:doctor
+          npm run mobile:export
+
+  docker:
+    name: Validation Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupération du dépôt
+        uses: actions/checkout@v4
+
+      - name: Validation du compose
+        env:
+          SECRET_KEY: ci-only-secret-value-longer-than-thirty-two-characters
+        run: docker compose -f docker-compose.yml config --quiet
+
+      - name: Build image API
+        run: docker build --file services/api/Dockerfile --tag safeclick-api:ci .
+
+      - name: Build image Web
+        run: docker build --file apps/web/Dockerfile --build-arg NEXT_PUBLIC_API_URL=http://localhost:8000 --tag safeclick-web:ci .

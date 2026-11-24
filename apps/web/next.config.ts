@@ -2,8 +2,14 @@ import type { NextConfig } from "next";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
+const connections = [`'self'`, apiUrl];
+if (process.env.NODE_ENV !== "production") {
+  connections.push("ws://localhost:3000", "ws://127.0.0.1:3000");
+}
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   // Le package partagé expose des fichiers TypeScript sources.
   transpilePackages: ["@safeclick/shared"],
   async headers() {
@@ -26,7 +32,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' data:",
-              `connect-src 'self' ${apiUrl} ws://localhost:3000 ws://127.0.0.1:3000`,
+              `connect-src ${connections.join(" ")}`,
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

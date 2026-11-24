@@ -1,36 +1,94 @@
+name: safeclick
+
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: safeclick-postgres
+  postgres:
+    image: postgres:17-alpine
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-safeclick}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changez_moi}
       POSTGRES_DB: ${POSTGRES_DB:-safeclick}
-    ports:
-      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-safeclick} -d ${POSTGRES_DB:-safeclick}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - safeclick
 
   redis:
-    image: redis:7-alpine
-    container_name: safeclick-redis
+    image: redis:8-alpine
     restart: unless-stopped
+    profiles: ["cache"]
+    networks:
+      - safeclick
+
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      SITE_URL: ${SITE_URL:-http://localhost:3000}
+      API_V1_PREFIX: /api/v1
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://safeclick:changez_moi@postgres:5432/safeclick}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      SECRET_KEY: "${SECRET_KEY:?Renseignez SECRET_KEY dans l'environnement}"
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-60}
+      EMAIL_BACKEND: ${EMAIL_BACKEND:-console}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      EMAIL_FROM: ${EMAIL_FROM:-ne-pas-repondre@safeclick.local}
     ports:
-      - "6379:6379"
-    volumes:
-      - redisdata:/data
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
+    command: >
+      sh -c "python -m alembic -c services/api/alembic.ini upgrade head &&
+             python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir services/api"
+    networks:
+      - safeclick
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - safeclick
 
 volumes:
-  pgdata:
-  redisdata:
+  postgres_data:
+
+networks:
+  safeclick:

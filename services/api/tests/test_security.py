@@ -21,6 +21,22 @@ def test_security_headers_are_present(client: TestClient) -> None:
     assert response.headers["Strict-Transport-Security"].startswith("max-age=")
 
 
+def test_cors_allows_api_key_header(client: TestClient) -> None:
+    response = client.options(
+        "/api/v1/analyze/url",
+        headers={
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type, x-api-key",
+        },
+    )
+
+    assert response.status_code == status.HTTP_200_OK
+    allowed = response.headers["Access-Control-Allow-Headers"].lower()
+    assert "x-api-key" in allowed
+    assert "content-type" in allowed
+
+
 def test_request_logs_never_contain_credentials(client: TestClient, caplog) -> None:  # type: ignore[no-untyped-def]
     secret = "Bearer jeton-ne-jamais-journaliser"
 

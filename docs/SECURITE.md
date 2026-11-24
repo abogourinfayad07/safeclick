@@ -12,7 +12,7 @@
 ### API
 
 - **En-têtes** : `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`, `Cache-Control: no-store` sur toutes les réponses. HSTS ajouté dès que `ENVIRONMENT` n'est pas `development`.
-- **CORS** : origine unique (`SITE_URL`), méthodes limitées à `GET`, `POST`, `DELETE`, `OPTIONS`, en-têtes limités à `Authorization` et `Content-Type`.
+- **CORS** : origine unique (`SITE_URL`), méthodes limitées à `GET`, `POST`, `DELETE`, `OPTIONS`, en-têtes limités à `Authorization`, `Content-Type` et `X-API-Key`.
 - **Limitation d'abus** : fenêtre glissante d'une minute, par adresse client et par groupe (`/auth`, `/analyze`, `/reports`, `/admin`). Valeurs configurables via `RATE_LIMIT_ENABLED` et `RATE_LIMIT_PER_MINUTE`.
 - **Journalisation sécurisée** : seuls la méthode, le chemin sans chaîne de requête, le statut et la durée sont journalisés. Aucun corps, en-tête `Authorization` ou jeton n'est écrit dans les logs.
 - **Vérification en console** : le jeton de vérification n'est affiché qu'en développement. En test et en production, aucun jeton n'est journalisé.
