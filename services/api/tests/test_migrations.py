@@ -20,7 +20,7 @@ def test_alembic_creates_initial_schema(tmp_path: Path) -> None:
         {
             "ENVIRONMENT": "test",
             "DATABASE_URL": database_url,
-            "SECRET_KEY": "test-only-placeholder",
+            "SECRET_KEY": "test-only-placeholder-key-longer-than-thirty-two-bytes",
         }
     )
 

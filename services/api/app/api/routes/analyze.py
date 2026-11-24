@@ -3,8 +3,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db
+from app.api.deps import get_db, get_optional_user
 from app.core.config import settings
+from app.models.user import User
 from app.schemas.analysis import (
     AnalyzeMessageRequest,
     AnalyzeUrlRequest,
@@ -22,9 +23,11 @@ router = APIRouter(prefix=settings.api_v1_prefix, tags=["analysis"])
     operation_id="analyze_url",
 )
 def analyze_url_route(
-    payload: AnalyzeUrlRequest, db: Session = Depends(get_db)
+    payload: AnalyzeUrlRequest,
+    db: Session = Depends(get_db),
+    user: User | None = Depends(get_optional_user),
 ) -> AnalysisResultResponse:
-    return analyze_url(db, payload.url)
+    return analyze_url(db, payload.url, user.id if user else None)
 
 
 @router.post(
@@ -34,6 +37,8 @@ def analyze_url_route(
     operation_id="analyze_message",
 )
 def analyze_message_route(
-    payload: AnalyzeMessageRequest, db: Session = Depends(get_db)
+    payload: AnalyzeMessageRequest,
+    db: Session = Depends(get_db),
+    user: User | None = Depends(get_optional_user),
 ) -> AnalysisResultResponse:
-    return analyze_message(db, payload.message)
+    return analyze_message(db, payload.message, user.id if user else None)

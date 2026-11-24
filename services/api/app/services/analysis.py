@@ -15,6 +15,7 @@ def _save_and_build(
     db: Session,
     raw: str,
     result: dict[str, object],
+    user_id: str | None = None,
 ) -> AnalysisResultResponse:
     result_id = new_id()
     created_at = utcnow()
@@ -27,7 +28,7 @@ def _save_and_build(
 
     record = Analysis(
         id=result_id,
-        user_id=None,
+        user_id=user_id,
         kind=kind,
         input_hash=hash_value(raw, "analysis"),
         input_preview=raw[:255],
@@ -54,12 +55,16 @@ def _save_and_build(
     )
 
 
-def analyze_url(db: Session, url: str) -> AnalysisResultResponse:
-    return _save_and_build(db, url, url_detector.analyze_url(url))
+def analyze_url(
+    db: Session, url: str, user_id: str | None = None
+) -> AnalysisResultResponse:
+    return _save_and_build(db, url, url_detector.analyze_url(url), user_id)
 
 
-def analyze_message(db: Session, message: str) -> AnalysisResultResponse:
-    return _save_and_build(db, message, message_detector.analyze_message(message))
+def analyze_message(
+    db: Session, message: str, user_id: str | None = None
+) -> AnalysisResultResponse:
+    return _save_and_build(db, message, message_detector.analyze_message(message), user_id)
 
 
 __all__ = ["analyze_message", "analyze_url"]

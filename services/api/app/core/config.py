@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     environment: str = "development"
     api_v1_prefix: str = "/api/v1"
     site_url: str = "http://localhost:3000"
+    email_backend: str = "console"
 
     database_url: str = "sqlite:///./data/safeclick.db"
     redis_url: str = "redis://localhost:6379/0"

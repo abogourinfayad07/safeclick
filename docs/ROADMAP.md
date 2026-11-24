@@ -26,7 +26,9 @@ Checklist détaillée : [`docs/PHASE3.md`](docs/PHASE3.md).
 
 Analyse URL passive, heuristiques homoglyphes/sous-domaines/raccourcisseurs, analyse de messages, classification à 3 niveaux, explications et limites.
 
-## Phase 4 — Authentification `[ ]`
+## Phase 4 — Authentification `[x]`
+
+Checklist détaillée : [`docs/PHASE4.md`](docs/PHASE4.md).
 
 Inscription, connexion, vérification e-mail (mode `console` en dev), réinitialisation, profil, sessions, historique, suppression de compte, confidentialité.
 

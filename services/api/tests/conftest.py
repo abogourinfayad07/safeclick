@@ -5,7 +5,9 @@ import os
 # Ces valeurs doivent être posées avant l'import de app.main.
 os.environ.setdefault("ENVIRONMENT", "test")
 os.environ.setdefault("DATABASE_URL", "sqlite:///:memory:")
-os.environ.setdefault("SECRET_KEY", "test-only-placeholder")
+os.environ.setdefault(
+    "SECRET_KEY", "test-only-placeholder-key-longer-than-thirty-two-bytes"
+)
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
