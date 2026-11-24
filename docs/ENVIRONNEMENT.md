@@ -38,11 +38,11 @@ Identité Git globale : `Fayad <abogourinfayad07@gmail.com>`.
 | Paquet | Version retenue | Vérification |
 |---|---|---|
 | next | 16.4.6 | peer React `^19.0.0` ✅ |
-| react / react-dom | 19.3.1 | cohérent avec Next 16 et RN 0.88 ✅ |
+| react / react-dom | 19.3.0 | aligné sur l'exigence Expo SDK 58, accepté par Next 16 et RN 0.88 ✅ |
 | react-native | 0.88.1 | peer `react ^19.3.0` ✅ |
 | expo | 58.0.26 | `engines.node` accepte `^26.0.0` ✅ |
 | tailwindcss / @tailwindcss/postcss | 4.3.5 | versions alignées ✅ |
-| typescript | 5.9.3 | volontairement **pas TypeScript 7** (outillage Next/shadcn non garanti) |
+| typescript | 5.9.3 (web) / 6.0.3 (mobile) | pas de TS 7 (outillage non garanti) ; Expo 58 exige ~6.0.3 |
 | @types/node | 26.6.6 | aligné Node 26 |
 | lucide-react | 1.79.0 | icônes |
 

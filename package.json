@@ -12,6 +12,9 @@
     "node": ">=22.13.0 <27.0.0",
     "npm": ">=11.0.0"
   },
+  "overrides": {
+    "minimatch": "11.0.9"
+  },
   "scripts": {
     "web:dev": "npm run dev -w @safeclick/web",
     "web:build": "npm run build -w @safeclick/web",

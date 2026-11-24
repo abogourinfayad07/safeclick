@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "SAFECLICK",
+    "slug": "safeclick",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "safeclick",
+    "userInterfaceStyle": "dark",
+    "plugins": ["expo-router"]
+  }
+}

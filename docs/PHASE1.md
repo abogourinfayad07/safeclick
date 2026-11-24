@@ -19,7 +19,7 @@
 
 ## Étape 3 — Frontend web `[x]`
 
-- [x] `apps/web/package.json` (Next 16.4.6, React 19.3.1, Tailwind 4.3.5, TypeScript 5.9.3)
+- [x] `apps/web/package.json` (Next 16.4.6, React 19.3.0, Tailwind 4.3.5, TypeScript 5.9.3)
 - [x] `next.config.ts`, `postcss.config.mjs`, `tsconfig.json`
 - [x] `app/globals.css` (thème bleu nuit / bleu électrique)
 - [x] `app/layout.tsx`, `app/page.tsx` (page d’accueil réelle, liens internes valides)
@@ -32,10 +32,19 @@
 
 > Next.js a automatiquement ajusté `jsx: react-jsx` et ajouté `.next/dev/types/**/*.ts` au `tsconfig.json` : changement attendu et conservé.
 
-## Étape 4 — Application mobile `[~]`
+## Étape 4 — Application mobile `[x]`
 
-- [x] `apps/mobile/package.json` minimal (nécessaire aux npm workspaces)
-- [ ] `app.json`, `tsconfig.json`, `App.tsx`, écran d’accueil, `npx expo-doctor`
+- [x] `apps/mobile/package.json` (Expo 58.0.26, Router 58.0.32, RN 0.88.1, React 19.3.0, TS 6.0.3)
+- [x] `app.json`, `tsconfig.json`, `expo-env.d.ts`, `babel.config.js`
+- [x] Navigation par fichiers : `app/_layout.tsx`, `app/index.tsx`, `app/analyze.tsx`
+- [x] `constants/theme.ts` aligné sur la palette web
+- [x] `expo-doctor` 1.21.8 ajouté en devDependency
+- [x] Correction des 2 écarts détectés par doctor : `newArchEnabled` retiré (schéma SDK 58), React aligné 19.3.0, TS mobile 6.0.3
+- [x] `npm install` → **0 vulnérabilité** après `overrides.minimatch = 11.0.9`
+- [x] `npm run typecheck` → web + mobile + shared OK
+- [x] `expo-doctor` → **20/20 checks passed**
+- [x] `npx expo export --platform android` → bundle Metro OK (1127 modules, 2.4 Mo `.hbc`)
+- [ ] Test sur téléphone via Expo Go (nécessite le téléphone de l'utilisateur)
 
 ## Étape 5 — Backend `[ ]`
 

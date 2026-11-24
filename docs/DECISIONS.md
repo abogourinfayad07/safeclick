@@ -38,11 +38,11 @@ Chaque décision indique le contexte, les options avec avantages/inconvénients,
 - **(a)** build et mise à jour simplifiés, idéal budget zéro ; dépendance à Expo. **(b)** contrôle natif total ; configuration Android Studio lourde.
 - **Retenir** : **(a)** Expo SDK 58, avec architecture permettant un `expo prebuild` ultérieur (et donc iOS).
 
-## ADR-007 — TypeScript 5.9.3
+## ADR-007 — TypeScript 5.9.3 (web) et 6.0.3 (mobile)
 
-- **Options** : (a) TypeScript 7.0.2 (latest), (b) 5.9.3.
-- **(a)** nouveautés du compilateur natif, mais compatibilité non garantie avec l'outillage Next/shadcn. **(b)** version largement éprouvée.
-- **Retenir** : **(b)**. Réévaluation après stabilisation de l'écosystème.
+- **Options** : (a) TypeScript 7 partout, (b) 5.9.3 partout, (c) version par workspace.
+- **(a)** compilateur natif, mais compatibilité non garantie avec Next/shadcn et Expo. **(b)** homogène, mais `expo-doctor` exige `~6.0.3` pour le SDK 58. **(c)** chaque workspace suit l'écosystème de son framework, au prix de deux versions de `tsc` dans le monorepo.
+- **Retenir** : **(c)**. Web en 5.9.3 (Next 16), mobile en 6.0.3 (Expo 58). `npm run typecheck` vérifie les deux. Réévaluation après stabilisation de TypeScript 7.
 
 ## ADR-008 — Argon2id + JWT pour l'authentification
 

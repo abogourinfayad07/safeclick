@@ -23,8 +23,8 @@ Principe central : **les clients ne font jamais confiance au résultat sans expl
 
 | Couche | Responsabilité | Technologie |
 |---|---|---|
-| Présentation web | Pages publiques, dashboard, admin, analyse | Next.js 16 App Router, React 19, TypeScript 5.9, Tailwind 4, shadcn/ui, Lucide |
-| Présentation mobile | Analyse rapide, historique, notifications | Expo 58, React Native 0.88, TypeScript 5.9 |
+| Présentation web | Pages publiques, dashboard, admin, analyse | Next.js 16 App Router, React 19.3.0, TypeScript 5.9.3, Tailwind 4, shadcn/ui, Lucide |
+| Présentation mobile | Analyse rapide, historique, notifications | Expo 58, React Native 0.88, React 19.3.0, TypeScript 6.0.3 |
 | Contrats | Types partagés, niveaux de risque, limites | `packages/shared` |
 | API | Routes versionnées, auth, quotas, erreurs, logs | FastAPI 0.165, Pydantic 2.14 |
 | Métier | Détecteurs URL/messages, scoring, explication | Python pur + scikit-learn en phase 7 |
