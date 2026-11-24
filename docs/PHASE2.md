@@ -22,12 +22,23 @@
 - [x] Tests : valeurs par défaut, unicité e-mail, contrainte de score, énums
 - [x] `npm run api:test` → **14 passed**
 
-## Étape 3 — Signalements et validation stricte `[ ]`
+## Étape 3 — Signalements et validation stricte `[x]`
 
-- [ ] `POST /api/v1/reports` : Pydantic strict, `extra="forbid"`
-- [ ] Hachage HMAC du contact, jamais de contact en clair en base
-- [ ] Statut initial `unverified`, réponse sans accusation
-- [ ] Tests : 201, doublon, 422 uniforme, absence du contact brut
-- [ ] Vérification finale phase 2 + commit
+- [x] `POST /api/v1/reports` : Pydantic strict, `extra="forbid"`, champs `field` explicites
+- [x] Hachage HMAC du contact, jamais de contact en clair en base
+- [x] Statut initial `unverified`, réponse sans accusation, doublon réutilisé
+- [x] Tests : 201, doublon, contact invalide, champ interdit, accusation non reconnue
+- [x] `npm run api:test` → **19 passed**
+
+## Vérification finale `[x]`
+
+- [x] `npm run typecheck` → web + mobile + shared OK
+- [x] `npm run web:build` → build production OK
+- [x] `npm run doctor -w @safeclick/mobile` → 20/20
+- [x] `npm audit --audit-level=moderate` → 0 vulnérabilité
+- [x] Smoke HTTP réel : migration + uvicorn sur `127.0.0.1:8012` → signalement `unverified`
+- [x] `git status` propre après commit
+
+**Phase 2 terminée.** Prochaine étape : phase 3 (moteur de détection, règles et scoring).
 
 > Aucune analyse d'URL ou de message n'est exposée ici : le moteur arrive en phase 3.

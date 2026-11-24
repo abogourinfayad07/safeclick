@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASE 1 — initialisation terminée et vérifiée. PHASE 2 — backend en cours.**  
-Le monorepo, le site web, l'application Expo et l’API de santé existent. Les fonctionnalités métier sont ajoutées étape par étape, avec une commande de vérification et un commit à chaque étape.
+**Statut : PHASES 1 et 2 terminées et vérifiées. PHASE 3 — moteur de détection à venir.**  
+Le monorepo, le site web, l'application Expo, l’API versionnée, les modèles, les migrations et le dépôt de signalements existent. L'analyse d'URL et de messages n'est pas encore exposée : elle sera ajoutée avec des tests dédiés en phase 3.
 
 ---
 
@@ -52,7 +52,10 @@ npm install
 python -m venv .venv
 .\.venv\Scripts\python -m pip install -r services\api\requirements-dev.txt
 
-# 4. Lancements (dans des terminaux séparés)
+# 4. Migration de la base (une fois avant le premier lancement API)
+npm run api:migrate
+
+# 5. Lancements (dans des terminaux séparés)
 npm run web:dev
 npm run api:dev
 
