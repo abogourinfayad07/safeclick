@@ -60,8 +60,13 @@
 - [x] `pytest` → **3 passed**, sans avertissement (bascule `httpx` → `httpx2` recommandé par Starlette)
 - [x] Smoke HTTP réel : uvicorn sur `127.0.0.1:8011` → `{"status":"ok","database":"ok",...}`
 
-## Étape 6 — Vérification finale `[ ]`
+## Étape 6 — Vérification finale `[x]`
 
-- [ ] `npm run typecheck`
-- [ ] `npm run api:test`
-- [ ] `git status --short` propre après commit
+- [x] `npm run typecheck` → web + mobile + shared OK
+- [x] `npm run web:build` → build production OK
+- [x] `npm run api:test` → 3 tests passed
+- [x] `npm run doctor -w @safeclick/mobile` → 20/20
+- [x] `npm audit --audit-level=moderate` → 0 vulnérabilité
+- [x] `git status --short` → vide après commit
+
+**Phase 1 terminée.** Prochaine étape : phase 2 (modèles de données, migrations, endpoints versionnés).

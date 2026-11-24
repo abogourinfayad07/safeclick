@@ -2,7 +2,7 @@
 
 Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 
-## Phase 1 — Initialisation `[~]`
+## Phase 1 — Initialisation `[x]`
 
 - [x] Analyse du cahier des charges et identification des risques
 - [x] Vérification réelle de l'environnement Windows
@@ -13,7 +13,7 @@ Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 - [x] Initialisation `apps/web` (Next.js 16 + TypeScript + Tailwind 4 + composants UI de base)
 - [x] Initialisation `apps/mobile` (Expo 58 + React Native 0.88)
 - [x] Initialisation `services/api` (FastAPI + SQLAlchemy + requirements + tests smoke)
-- [ ] Vérification : `npm run typecheck`, `npm run api:test`, commit
+- [x] Vérification : `npm run typecheck`, `npm run web:build`, `npm run api:test`, `expo-doctor`, `npm audit`, commit
 
 ## Phase 2 — Backend `[ ]`
 

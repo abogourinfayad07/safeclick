@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASE 1 — initialisation du monorepo (en cours).**  
-Ce dépôt contient aujourd'hui le squelette et la documentation. Les applications ne sont pas encore fonctionnelles : elles seront ajoutées étape par étape, avec des commandes de vérification à chaque fois.
+**Statut : PHASE 1 — initialisation terminée et vérifiée. PHASE 2 — backend en cours.**  
+Le monorepo, le site web, l'application Expo et l’API de santé existent. Les fonctionnalités métier sont ajoutées étape par étape, avec une commande de vérification et un commit à chaque étape.
 
 ---
 
@@ -45,7 +45,7 @@ cd "C:\Users\HP\OneDrive\Documents\Projet par défaut"
 # 1. Configuration locale
 Copy-Item .env.example .env
 
-# 2. Dépendances JavaScript (une fois les apps créées)
+# 2. Dépendances JavaScript
 npm install
 
 # 3. Environnement Python (les scripts npm utilisent directement ce venv)
@@ -60,7 +60,7 @@ npm run api:dev
 npm run api:test
 ```
 
-> Les fichiers `services\api\requirements.txt`, `apps\web` et `apps\mobile` sont créés aux étapes suivantes de la phase 1. Aucune commande n'est présentée comme déjà réussie tant qu'elle n'a pas été exécutée.
+> Les commandes ci-dessus ont été exécutées sur l'environnement Windows décrit plus haut. `npm run api:test` utilise directement le venv `.venv`, sans activation manuelle.
 
 ---
 
