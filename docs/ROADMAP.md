@@ -12,7 +12,7 @@ Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 - [x] Documentation initiale
 - [x] Initialisation `apps/web` (Next.js 16 + TypeScript + Tailwind 4 + composants UI de base)
 - [x] Initialisation `apps/mobile` (Expo 58 + React Native 0.88)
-- [ ] Initialisation `services/api` (FastAPI + SQLAlchemy + requirements + tests smoke)
+- [x] Initialisation `services/api` (FastAPI + SQLAlchemy + requirements + tests smoke)
 - [ ] Vérification : `npm run typecheck`, `npm run api:test`, commit
 
 ## Phase 2 — Backend `[ ]`

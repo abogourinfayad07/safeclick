@@ -35,7 +35,8 @@
 ## Étape 4 — Application mobile `[x]`
 
 - [x] `apps/mobile/package.json` (Expo 58.0.26, Router 58.0.32, RN 0.88.1, React 19.3.0, TS 6.0.3)
-- [x] `app.json`, `tsconfig.json`, `expo-env.d.ts`, `babel.config.js`
+- [x] `app.json`, `tsconfig.json`, `babel.config.js`
+- [x] Expo a régénéré `tsconfig.json` et supprimé le `expo-env.d.ts` manuel (types désormais fournis par `expo/tsconfig.base`) — vérifié : doctor 20/20, typecheck OK
 - [x] Navigation par fichiers : `app/_layout.tsx`, `app/index.tsx`, `app/analyze.tsx`
 - [x] `constants/theme.ts` aligné sur la palette web
 - [x] `expo-doctor` 1.21.8 ajouté en devDependency
@@ -46,9 +47,18 @@
 - [x] `npx expo export --platform android` → bundle Metro OK (1127 modules, 2.4 Mo `.hbc`)
 - [ ] Test sur téléphone via Expo Go (nécessite le téléphone de l'utilisateur)
 
-## Étape 5 — Backend `[ ]`
+## Étape 5 — Backend `[x]`
 
-À faire : `services/api/requirements.txt`, `pyproject.toml`, `app/main.py`, `app/core/config.py`, `app/api/routes/health.py`, `tests/test_health.py`, venv + pytest.
+- [x] `services/api/requirements.txt` + `requirements-dev.txt` (versions épinglées)
+- [x] `pyproject.toml` (pytest, `pythonpath`, Python >= 3.12)
+- [x] `app/core/config.py` (Pydantic Settings, `.env` uniquement)
+- [x] `app/db/base.py`, `app/db/session.py` (SQLAlchemy, création du dossier SQLite local)
+- [x] `app/api/deps.py`, `app/api/routes/health.py`, `app/schemas/health.py`
+- [x] `app/main.py` (FastAPI, CORS depuis `SITE_URL`, `/health`, `/`, OpenAPI)
+- [x] `tests/conftest.py` + `tests/test_health.py` (3 tests)
+- [x] venv `.venv` créé, `pip check` → **No broken requirements found**
+- [x] `pytest` → **3 passed**, sans avertissement (bascule `httpx` → `httpx2` recommandé par Starlette)
+- [x] Smoke HTTP réel : uvicorn sur `127.0.0.1:8011` → `{"status":"ok","database":"ok",...}`
 
 ## Étape 6 — Vérification finale `[ ]`
 

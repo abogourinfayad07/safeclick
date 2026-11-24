@@ -53,7 +53,9 @@ Résolution réussie sur CPython 3.15 (des wheels `cp315` existent) :
 - fastapi 0.165.0, pydantic 2.14.4, pydantic-core 2.50.5 (cp315), SQLAlchemy 2.1.9
 - scikit-learn 1.9.1, numpy 2.5.5, scipy 1.18.1
 - uvicorn 0.54.0, alembic 1.20.1, argon2-cffi 25.1.0, PyJWT 2.15.1
-- psycopg[binary] 3.3.9, redis 8.2.0, pytest 9.2.0, httpx 0.28.1
+- psycopg[binary] 3.3.9, redis 8.2.0, pytest 9.2.0
+- pydantic-settings 2.16.3 + python-dotenv 1.2.4 (l'extra `dotenv` n'existe plus)
+- httpx2 2.16.2 (remplace httpx 0.28.1 : Starlette 1.10 déprécie httpx pour `TestClient`)
 
 > `pip` affiche des notices sur `stderr` sous PowerShell ; la ligne `Would install ...` confirme que la résolution est valide. Rien n'a été installé définitivement (`--dry-run`).
 

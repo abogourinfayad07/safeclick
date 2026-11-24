@@ -1,0 +1,1 @@
+"""Regroupement des routeurs FastAPI."""
