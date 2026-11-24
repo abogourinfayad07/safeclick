@@ -48,14 +48,16 @@ Copy-Item .env.example .env
 # 2. Dépendances JavaScript (une fois les apps créées)
 npm install
 
-# 3. Environnement Python
+# 3. Environnement Python (les scripts npm utilisent directement ce venv)
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r services\api\requirements.txt
+.\.venv\Scripts\python -m pip install -r services\api\requirements-dev.txt
 
 # 4. Lancements (dans des terminaux séparés)
 npm run web:dev
 npm run api:dev
+
+# Tests API
+npm run api:test
 ```
 
 > Les fichiers `services\api\requirements.txt`, `apps\web` et `apps\mobile` sont créés aux étapes suivantes de la phase 1. Aucune commande n'est présentée comme déjà réussie tant qu'elle n'a pas été exécutée.
