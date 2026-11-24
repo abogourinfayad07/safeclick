@@ -5,10 +5,11 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from app.core.config import settings
 
-from .base import Base  # noqa: F401  (exporte la base pour les futures migrations)
+from .base import Base  # noqa: F401  (exporte la base pour les migrations)
 
 
 def _prepare_sqlite_directory(url: str) -> None:
@@ -29,17 +30,18 @@ def _prepare_sqlite_directory(url: str) -> None:
 
 _prepare_sqlite_directory(settings.database_url)
 
-_connect_args = (
-    {"check_same_thread": False}
-    if settings.database_url.startswith("sqlite")
-    else {}
-)
+_is_sqlite = settings.database_url.startswith("sqlite")
+_is_memory = settings.database_url in {"sqlite:///:memory:", "sqlite://"}
 
-engine = create_engine(
-    settings.database_url,
-    connect_args=_connect_args,
-    pool_pre_ping=True,
-)
+_engine_options: dict[str, object] = {"pool_pre_ping": True}
+if _is_sqlite:
+    _engine_options["connect_args"] = {"check_same_thread": False}
+if _is_memory:
+    # Une seule connexion partagée : les tests HTTP et les threads FastAPI
+    # voient exactement le même schéma en mémoire.
+    _engine_options["poolclass"] = StaticPool
+
+engine = create_engine(settings.database_url, **_engine_options)
 
 SessionLocal = sessionmaker(
     bind=engine,

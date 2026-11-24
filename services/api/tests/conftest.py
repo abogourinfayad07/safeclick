@@ -10,7 +10,15 @@ os.environ.setdefault("SECRET_KEY", "test-only-placeholder")
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
+import app.models  # noqa: E402,F401  (enregistre les tables dans les métadonnées)
+from app.db.base import Base  # noqa: E402
+from app.db.session import engine  # noqa: E402
 from app.main import app  # noqa: E402
+
+
+@pytest.fixture(scope="session", autouse=True)
+def create_test_schema() -> None:
+    Base.metadata.create_all(bind=engine)
 
 
 @pytest.fixture()

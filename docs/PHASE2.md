@@ -10,14 +10,17 @@
 - [x] Tests : santé versionnée, contrat info, erreur 404 uniforme, OpenAPI
 - [x] `npm run api:test` → **7 passed**, sans avertissement
 
-## Étape 2 — Modèles et migrations `[ ]`
+## Étape 2 — Modèles et migrations `[x]`
 
-- [ ] Modèles SQLAlchemy : `users`, `analyses`, `reports`
-- [ ] Énums partagées côté Python alignées sur `packages/shared`
-- [ ] Alembic : `alembic.ini`, `env.py`, `script.py.mako`, migration `0001`
-- [ ] Script npm `api:migrate`
-- [ ] Test : migration appliquée sur une base SQLite temporaire
-- [ ] Test : contraintes et valeurs par défaut des modèles
+- [x] Modèles SQLAlchemy : `users`, `analyses`, `reports`
+- [x] Énums Python alignées sur les chaînes de `packages/shared` (`low/medium/high`, `url/message`)
+- [x] `app/core/hashing.py` : HMAC-SHA256 du contact, jamais de valeur brute
+- [x] `app/db/session.py` : `StaticPool` pour SQLite en mémoire (tests HTTP cohérents)
+- [x] Alembic : `alembic.ini`, `env.py`, `script.py.mako`, migration `0001_initial_schema`
+- [x] Script npm `api:migrate` vérifié depuis la racine sur une base temporaire
+- [x] Test : migration appliquée sur SQLite + index unique vérifié
+- [x] Tests : valeurs par défaut, unicité e-mail, contrainte de score, énums
+- [x] `npm run api:test` → **14 passed**
 
 ## Étape 3 — Signalements et validation stricte `[ ]`
 
