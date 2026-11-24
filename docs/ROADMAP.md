@@ -10,8 +10,8 @@ Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 - [x] Création du monorepo et des fichiers racine
 - [x] Configuration Git (branche `main`, identité, commit initial)
 - [x] Documentation initiale
-- [ ] Initialisation `apps/web` (Next.js 16 + TypeScript + Tailwind 4 + shadcn/ui)
-- [ ] Initialisation `apps/mobile` (Expo 58 + React Native 0.88)
+- [x] Initialisation `apps/web` (Next.js 16 + TypeScript + Tailwind 4 + composants UI de base)
+- [~] Initialisation `apps/mobile` (Expo 58 + React Native 0.88 — socle npm en place)
 - [ ] Initialisation `services/api` (FastAPI + SQLAlchemy + requirements + tests smoke)
 - [ ] Vérification : `npm run typecheck`, `npm run api:test`, commit
 

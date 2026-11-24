@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #070d1f;
+  --color-night-900: #0b1228;
+  --color-night-800: #111c3a;
+  --color-electric-300: #60a5fa;
+  --color-electric-400: #3b82f6;
+  --color-electric-500: #2563eb;
+  --color-safe-500: #16a34a;
+  --color-warn-500: #f59e0b;
+  --color-danger-500: #dc2626;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-night-950);
+  color: #e8eefc;
+}
+
+::selection {
+  background-color: var(--color-electric-500);
+  color: #ffffff;
+}
