@@ -18,9 +18,9 @@ def normalize_contact(value: str, kind: str) -> str:
     return cleaned.casefold()
 
 
-def hash_contact(value: str, kind: str) -> str:
-    """HMAC-SHA256 : le secret applicatif empêche le hachage inverse trivial."""
-    normalized = normalize_contact(value, kind)
+def hash_value(value: str, domain: str) -> str:
+    """HMAC-SHA256 générique : empêche le hachage inverse trivial."""
+    normalized = normalize_contact(value, domain)
     return hmac.new(
         settings.secret_key.encode("utf-8"),
         normalized.encode("utf-8"),
@@ -28,4 +28,9 @@ def hash_contact(value: str, kind: str) -> str:
     ).hexdigest()
 
 
-__all__ = ["hash_contact", "normalize_contact"]
+def hash_contact(value: str, kind: str) -> str:
+    """Hachage appliqué aux contacts signalés."""
+    return hash_value(value, kind)
+
+
+__all__ = ["hash_contact", "hash_value", "normalize_contact"]

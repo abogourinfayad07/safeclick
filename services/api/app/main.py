@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.errors import register_error_handlers
-from app.api.routes import health, meta, reports
+from app.api.routes import analyze, health, meta, reports
 from app.core.config import settings
 from app.core.version import API_VERSION
 
@@ -29,6 +29,7 @@ app.include_router(health.router)
 app.include_router(health.v1_router)
 app.include_router(meta.router)
 app.include_router(reports.router)
+app.include_router(analyze.router)
 
 
 @app.get("/", include_in_schema=False)

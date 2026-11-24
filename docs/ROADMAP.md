@@ -20,7 +20,9 @@ Légende : `[x]` vérifié, `[~]` en cours, `[ ]` à faire.
 Modèles, migrations Alembic, validation Pydantic, gestion d'erreurs, endpoints `/api/v1/...`, tests.  
 Checklist détaillée : [`docs/PHASE2.md`](docs/PHASE2.md).
 
-## Phase 3 — Moteur d'analyse `[ ]`
+## Phase 3 — Moteur d'analyse `[x]`
+
+Checklist détaillée : [`docs/PHASE3.md`](docs/PHASE3.md).
 
 Analyse URL passive, heuristiques homoglyphes/sous-domaines/raccourcisseurs, analyse de messages, classification à 3 niveaux, explications et limites.
 

@@ -2,8 +2,8 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 et 2 terminées et vérifiées. PHASE 3 — moteur de détection à venir.**  
-Le monorepo, le site web, l'application Expo, l’API versionnée, les modèles, les migrations et le dépôt de signalements existent. L'analyse d'URL et de messages n'est pas encore exposée : elle sera ajoutée avec des tests dédiés en phase 3.
+**Statut : PHASES 1 à 3 terminées et vérifiées. PHASE 4 — authentification en cours.**  
+Le moteur de détection est exposé via `/api/v1/analyze/url` et `/api/v1/analyze/message`. Il est purement passif : aucun lien n'est visité par le serveur.
 
 ---
 
