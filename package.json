@@ -22,7 +22,7 @@
     "mobile:doctor": "npm run doctor -w @safeclick/mobile",
     "mobile:export": "npm run export -w @safeclick/mobile",
     "deploy:preflight": "python scripts/preflight.py --mode local",
-    "api:dev": ".\\.venv\\Scripts\\python -m uvicorn app.main:app --reload --app-dir services/api",
+    "api:dev": ".\\.venv\\Scripts\\python -m uvicorn app.main:app --reload --reload-dir services/api --app-dir services/api",
     "api:migrate": ".\\.venv\\Scripts\\python -m alembic -c services/api/alembic.ini upgrade head",
     "api:test": ".\\.venv\\Scripts\\python -m pytest services/api/tests -v",
     "ml:train": "set PYTHONPATH=services/api&& .\\.venv\\Scripts\\python -m app.ml.train",

@@ -9,6 +9,8 @@ if (process.env.NODE_ENV !== "production") {
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Permet d'ouvrir le serveur de développement via 127.0.0.1 aussi bien que localhost.
+  allowedDevOrigins: ["127.0.0.1"],
   output: "standalone",
   // Le package partagé expose des fichiers TypeScript sources.
   transpilePackages: ["@safeclick/shared"],
