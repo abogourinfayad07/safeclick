@@ -1,0 +1,55 @@
+# ---------- Node / Next.js ----------
+node_modules/
+dist/
+.next/
+out/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ---------- Expo / React Native ----------
+# Les dossiers natifs sont générés par `expo prebuild` en flux managé.
+.expo/
+.expo-shared/
+android/
+ios/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Secrets et variables d'environnement ----------
+.env
+.env.*
+!.env.example
+
+# ---------- Données locales ----------
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------- Logs ----------
+logs/
+*.log
+
+# ---------- Système / éditeurs ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
