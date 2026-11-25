@@ -41,12 +41,19 @@ def _valid_https(value: str) -> bool:
     return value.startswith("https://") and "localhost" not in value and "127.0.0.1" not in value
 
 
+def _valid_database_url(value: str) -> bool:
+    # Neon fournit souvent postgres://... ; l'API ajoute automatiquement le pilote.
+    return value.strip().startswith(
+        ("postgresql+psycopg://", "postgresql://", "postgres://")
+    )
+
+
 REQUIRED_DEPLOY_ENV = {
     "ENVIRONMENT": lambda value: value == "production",
     "SECRET_KEY": _valid_secret,
     "SITE_URL": _valid_https,
     "NEXT_PUBLIC_API_URL": _valid_https,
-    "DATABASE_URL": lambda value: value.startswith("postgresql+psycopg://"),
+    "DATABASE_URL": _valid_database_url,
     "EMAIL_BACKEND": lambda value: bool(value) and value != "console",
     "RATE_LIMIT_ENABLED": lambda value: value.lower() in {"1", "true", "yes"},
 }

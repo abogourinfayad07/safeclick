@@ -32,12 +32,13 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 - [x] Documentation des variables et des commandes PowerShell
 - [x] Documentation des étapes encore manuelles et des procédures de rollback
+- [x] Base Neon préparée : URL normalisée, TLS forcé, `db:check` et migration manuelle via GitHub
 - [x] Aucun compte, domaine, certificat, abonnement ou publication Android créé
 
 ## Étape 5 — Actions réelles encore en attente `[ ]`
 
 - [x] Premier `push` exécutant le workflow GitHub Actions — run #1 vert
-- [ ] Création du dépôt distant et des secrets GitHub par le propriétaire
+- [ ] Création des secrets GitHub (`DATABASE_URL`, etc.) par le propriétaire
 - [ ] Choix et achat du domaine, configuration DNS
 - [ ] Terminaison TLS/HTTPS par le reverse proxy ou l'hébergeur
 - [ ] Serveur ou service d'hébergement avec Docker + PostgreSQL

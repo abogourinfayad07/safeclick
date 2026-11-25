@@ -120,4 +120,5 @@ SAFECLICK/
 - [Checklist phase 9](docs/PHASE9.md)
 - [Checklist phase 10](docs/PHASE10.md)
 - [Préparation du déploiement](docs/DEPLOYMENT.md)
+- [Base PostgreSQL en ligne — Neon](docs/NEON.md)
 - [Checklist phase 1](docs/PHASE1.md)

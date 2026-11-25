@@ -12,6 +12,7 @@ Ce document décrit ce qui est **prêt dans le dépôt** et ce qui reste à fair
 | Image API | `services/api/Dockerfile` | Prête |
 | Image web | `apps/web/Dockerfile` | Prête, sortie Next standalone |
 | Composition des services | `docker-compose.yml` | Prête ; PostgreSQL + API + web, Redis optionnel |
+| Base managée Neon | [`docs/NEON.md`](NEON.md), `.github/workflows/database.yml` | Prête ; URL normalisée, TLS forcé, migration manuelle |
 | Pré-vérification | `scripts/preflight.py`, `npm run deploy:preflight` | Prête |
 | Limites de sécurité | `docs/SECURITE.md` | Documentées |
 
@@ -28,7 +29,7 @@ Toutes les valeurs sont lues depuis l'environnement du processus ou d'un `.env` 
 | `SITE_URL` | `https://<votre-domaine>` | Doit correspondre exactement à l'origine web pour le CORS |
 | `NEXT_PUBLIC_API_URL` | `https://api.<votre-domaine>` | Valeur publique intégrée au build web |
 | `EXPO_PUBLIC_API_URL` | `https://api.<votre-domaine>` | Valeur publique intégrée au bundle mobile |
-| `DATABASE_URL` | `postgresql+psycopg://...` | SQLite refusé en production par la pré-vérification |
+| `DATABASE_URL` | `postgresql+psycopg://...` ou URL Neon `postgres://...` | Le pilote et `sslmode=require` sont ajoutés automatiquement ; SQLite refusé en production |
 | `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | valeurs choisies | Le mot de passe par défaut du compose est un placeholder |
 | `EMAIL_BACKEND` | `smtp` | `console` interdit en production par la pré-vérification |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `EMAIL_FROM` | fournis par l'hébergeur d'e-mail | Aucun service payant imposé |

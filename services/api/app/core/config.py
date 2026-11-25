@@ -1,9 +1,30 @@
 """Configuration de l'API, exclusivement via variables d'environnement."""
 
 from functools import lru_cache
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from pydantic import Field
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+VALID_SSL_MODES = {"require", "verify-ca", "verify-full"}
+
+
+def normalize_database_url(value: str) -> str:
+    """Accepte les URL Neon et force le pilote et le TLS adaptés."""
+    normalized = value.strip()
+    if normalized.startswith(("postgres://", "postgresql://")):
+        normalized = "postgresql+psycopg://" + normalized.split("://", 1)[1]
+    if not normalized.startswith("postgresql+psycopg://"):
+        return normalized
+
+    parts = urlsplit(normalized)
+    query = dict(parse_qsl(parts.query, keep_blank_values=True))
+    if query.get("sslmode", "").lower() not in VALID_SSL_MODES:
+        query["sslmode"] = "require"
+    return urlunsplit(
+        (parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment)
+    )
 
 
 class Settings(BaseSettings):
@@ -35,6 +56,17 @@ class Settings(BaseSettings):
     # dans des tests isolés ou derrière un proxy applicatif dédié.
     rate_limit_enabled: bool = True
     rate_limit_per_minute: int = 60
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _normalize_database_url(cls, value: str) -> str:
+        return normalize_database_url(value)
+
+    @model_validator(mode="after")
+    def _refuse_sqlite_in_production(self) -> "Settings":
+        if self.environment.lower() == "production" and self.database_url.startswith("sqlite"):
+            raise ValueError("SQLite est interdit en production : utilisez PostgreSQL.")
+        return self
 
     @property
     def is_development(self) -> bool:
