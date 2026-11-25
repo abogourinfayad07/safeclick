@@ -9,11 +9,14 @@ BLUEPRINT = ROOT / "render.yaml"
 def test_blueprint_contains_the_two_expected_services() -> None:
     content = BLUEPRINT.read_text(encoding="utf-8")
 
-    assert "name: safeclick-api" in content
+    assert "name: safeclick" in content
     assert "name: safeclick-web" in content
     assert "healthCheckPath: /health" in content
     assert "dockerfilePath: ./services/api/Dockerfile" in content
     assert "dockerfilePath: ./apps/web/Dockerfile" in content
+    # URLs réellement attribuées par Render (le nom `safeclick` était pris).
+    assert "https://safeclick-btd6.onrender.com" in content
+    assert "https://safeclick-web.onrender.com" in content
 
 
 def test_database_url_is_a_render_secret_not_a_committed_value() -> None:

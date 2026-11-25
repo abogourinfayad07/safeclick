@@ -2,78 +2,97 @@
 
 Ce document décrit le déploiement gratuit de SAFECLICK sur Render, sans domaine payant. La base reste sur Neon. Aucun secret n’est écrit dans le dépôt.
 
-## 1. Ce que contient le blueprint
+## 1. État réel du déploiement
 
-Le fichier `render.yaml` à la racine définit deux services :
+Le déploiement a été effectué manuellement depuis le dashboard Render, en suivant les mêmes valeurs que `render.yaml`. Le blueprint reste la référence reproductible dans le dépôt.
 
-| Service | URL prévue | Rôle |
+| Service Render | URL publique | Rôle |
 |---|---|---|
-| `safeclick-api` | `https://safeclick-api.onrender.com` | API FastAPI, migrations au démarrage |
+| `safeclick` | `https://safeclick-btd6.onrender.com` | API FastAPI, migrations au démarrage |
 | `safeclick-web` | `https://safeclick-web.onrender.com` | Site Next.js standalone |
 
-Les deux services utilisent le plan gratuit `free` et la région `ohio`, proche de la base Neon. Le plan gratuit met le service en sommeil après 15 minutes sans trafic ; la première requête suivante prend environ une minute.
+Le nom `safeclick` étant déjà pris sur Render, l’API a reçu le suffixe `-btd6`. Toutes les URLs publiques utilisent donc ce suffixe. Les deux services sont en région `oregon` et en plan gratuit `free`.
 
-## 2. Conditions à vérifier
+Le plan gratuit met le service en sommeil après 15 minutes sans trafic ; la première requête suivante prend environ une minute.
 
-- Compte Render gratuit, sans carte bancaire selon les conditions affichées au moment de la création.
-- Projet Neon déjà créé et migré, avec sa chaîne de connexion disponible.
-- Dépôt GitHub connecté à Render : `abogourinfayad07/safeclick`.
-- Aucun domaine personnalisé pour l’instant : on utilise les sous-domaines `onrender.com`.
+## 2. Vérifications effectuées
 
-Si l’un des deux noms est déjà pris, Render ajoutera un suffixe. Dans ce cas, mets à jour `SITE_URL` côté API et `NEXT_PUBLIC_API_URL` / `EXPO_PUBLIC_API_URL` côté web dans le dashboard, puis redéploie le web.
-
-## 3. Déployer
-
-1. Ouvre `https://dashboard.render.com`.
-2. Clique sur **New** puis **Blueprint**.
-3. Connecte le dépôt GitHub `abogourinfayad07/safeclick`.
-4. Sélectionne la branche `main`.
-5. Render détecte `render.yaml` et affiche les deux services.
-6. Quand Render demande la valeur de `DATABASE_URL`, colle la chaîne Neon. Elle est masquée dans l’interface et dans les logs.
-7. Laisse `SECRET_KEY` être générée automatiquement par Render.
-8. Clique sur **Apply**.
-
-Le premier déploiement peut prendre 10 à 15 minutes : image Python, image Node, build Next.js puis migrations.
-
-## 4. Vérifications après déploiement
-
-Ouvre successivement :
+Les réponses suivantes ont été contrôlées après déploiement :
 
 ```text
-https://safeclick-api.onrender.com/health
-https://safeclick-api.onrender.com/api/v1/info
-https://safeclick-api.onrender.com/api/v1/billing/plans
+https://safeclick-btd6.onrender.com/health
+https://safeclick-btd6.onrender.com/api/v1/info
+https://safeclick-btd6.onrender.com/api/v1/billing/plans
 https://safeclick-web.onrender.com/
 https://safeclick-web.onrender.com/offres
 ```
 
-Attendu :
+Résultats :
 
-- `/health` renvoie un JSON avec un statut sain ;
-- `/api/v1/info` répond sans erreur ;
-- `/api/v1/billing/plans` indique `paymentActive: false` ;
-- le site web charge avec ses en-têtes de sécurité ;
-- la page `/offres` affiche FREE, PRO et BUSINESS sans paiement actif.
+- `/health` → `{"status":"ok","database":"ok","environment":"production","version":"0.1.0"}` ;
+- `/api/v1/info` → OK, contraintes et disclaimer affichés ;
+- `/api/v1/billing/plans` → `paymentActive: false`, offres FREE / PRO / BUSINESS ;
+- site web → page d’accueil et page `/offres` chargées ;
+- CORS → `access-control-allow-origin: https://safeclick-web.onrender.com` ;
+- en-têtes web → CSP avec `connect-src 'self' https://safeclick-btd6.onrender.com`, HSTS côté API, `nosniff`, `DENY`, `no-referrer`.
 
-Si une URL est encore froide, recharge après une minute : c’est le réveil du plan gratuit.
+Un risque faible reste toujours indicatif et n’est jamais une garantie de sécurité.
 
-## 5. Variables sensibles
+## 3. Configuration des services
 
-| Variable | Où la mettre |
+### API `safeclick`
+
+| Variable | Valeur |
 |---|---|
-| `DATABASE_URL` | Dashboard Render, quand le blueprint le demande |
-| `SECRET_KEY` | Générée par Render (`generateValue: true`) |
-| `SITE_URL` | Déjà fixée sur l’URL web prévue dans `render.yaml` |
-| `NEXT_PUBLIC_API_URL` | Déjà fixée sur l’URL API prévue dans `render.yaml` |
+| `ENVIRONMENT` | `production` |
+| `PORT` | `8000` |
+| `API_V1_PREFIX` | `/api/v1` |
+| `DATABASE_URL` | secret saisi dans le dashboard, jamais dans le dépôt |
+| `SECRET_KEY` | générée par Render |
+| `SITE_URL` | `https://safeclick-web.onrender.com` |
+| `NEXT_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` |
+| `EXPO_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` |
+| `EMAIL_BACKEND` | `console` |
+| `RATE_LIMIT_ENABLED` | `true` |
+| `RATE_LIMIT_PER_MINUTE` | `60` |
 
-Ne jamais remplacer `sync: false` par une valeur réelle dans `render.yaml`.
+**Docker Command** — obligatoire sur le plan gratuit, car `preDeployCommand` est réservé aux plans payants :
 
-## 6. Limites connues
+```sh
+/bin/sh -c "python -m alembic -c services/api/alembic.ini upgrade head && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir services/api"
+```
+
+**Health Check Path** : `/health`
+
+### Web `safeclick-web`
+
+| Variable | Valeur |
+|---|---|
+| `ENVIRONMENT` | `production` |
+| `PORT` | `3000` |
+| `NEXT_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` |
+| `EXPO_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` |
+
+**Health Check Path** : `/`
+
+`NEXT_PUBLIC_API_URL` est intégré au build Next.js. Toute modification exige un nouveau build du service web. Render transmet automatiquement les variables d’environnement comme arguments de build Docker.
+
+## 4. Redéployer après une modification
+
+1. Dashboard Render → service concerné → **Environment** ou **Settings**.
+2. Modifier la valeur.
+3. Choisir **Save, rebuild, and deploy**.
+4. Vérifier les logs puis les URLs de la section 2.
+
+Si `NEXT_PUBLIC_API_URL` ou `EXPO_PUBLIC_API_URL` change, redéployer aussi le web. Si `SITE_URL` change, redéployer l’API pour que le CORS suive.
+
+## 5. Limites connues
 
 - Plan gratuit : sommeil après inactivité et 750 heures par mois partagées entre les services.
 - Une seule réplique API : le limiteur d’abus reste en mémoire.
 - Aucun SMTP configuré : l’inscription avec vérification e-mail n’est pas encore utilisable en production. Le reste de l’application, notamment l’analyse publique, fonctionne.
-- Aucun domaine personnalisé ni certificate manuel : Render fournit HTTPS sur les sous-domaines.
+- Aucun domaine personnalisé ni certificat manuel : Render fournit HTTPS sur les sous-domaines `onrender.com`.
 - Les fichiers locaux sont perdus au redéploy : Neon reste la seule source de données persistante.
+- Aucun abonnement payant ni service Render supplémentaire n’a été souscrit.
 
 La procédure générale est dans [`docs/DEPLOYMENT.md`](DEPLOYMENT.md).

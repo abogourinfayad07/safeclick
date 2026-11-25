@@ -1,6 +1,6 @@
 # Déploiement SAFECLICK — préparation sans publication
 
-Ce document décrit ce qui est **prêt dans le dépôt** et ce qui reste à faire par le propriétaire. Aucun compte, domaine, certificat, abonnement ou publication n'a été créé automatiquement.
+Ce document décrit ce qui est **prêt dans le dépôt**, ce qui a été déployé manuellement par le propriétaire et ce qui reste à faire. Aucun compte, domaine, certificat, abonnement ou publication n'a été créé automatiquement par l'assistant.
 
 ## 1. Ce qui est prêt
 
@@ -13,9 +13,19 @@ Ce document décrit ce qui est **prêt dans le dépôt** et ce qui reste à fair
 | Image web | `apps/web/Dockerfile` | Prête, sortie Next standalone |
 | Composition des services | `docker-compose.yml` | Prête ; PostgreSQL + API + web, Redis optionnel |
 | Base managée Neon | [`docs/NEON.md`](NEON.md), `.github/workflows/database.yml` | Prête ; URL normalisée, TLS forcé, migration manuelle |
-| Déploiement Render | [`docs/RENDER.md`](RENDER.md), `render.yaml` | Prêt ; API + web en plan gratuit, secrets hors du dépôt |
+| Déploiement Render | [`docs/RENDER.md`](RENDER.md), `render.yaml` | Déployé : API `safeclick` et web `safeclick-web`, HTTPS gratuit, secrets hors du dépôt |
 | Pré-vérification | `scripts/preflight.py`, `npm run deploy:preflight` | Prête |
 | Limites de sécurité | `docs/SECURITE.md` | Documentées |
+
+### État réel en production
+
+```text
+API  : https://safeclick-btd6.onrender.com
+Web  : https://safeclick-web.onrender.com
+Base : Neon, base neondb, TLS obligatoire
+```
+
+Le suffixe `-btd6` vient du nom `safeclick` déjà attribué sur Render. Le CORS autorise exactement l’origine web et le build Next.js intègre la vraie URL API. Détails et vérifications : [`docs/RENDER.md`](RENDER.md).
 
 Le workflow CI ne contient **aucun job de déploiement** : il ne publie rien et ne touche pas à la production.
 
@@ -27,9 +37,9 @@ Toutes les valeurs sont lues depuis l'environnement du processus ou d'un `.env` 
 |---|---|---|
 | `ENVIRONMENT` | `production` | Active notamment HSTS côté API |
 | `SECRET_KEY` | valeur aléatoire d'au moins 32 caractères | Jamais dans le dépôt |
-| `SITE_URL` | `https://<votre-domaine>` | Doit correspondre exactement à l'origine web pour le CORS |
-| `NEXT_PUBLIC_API_URL` | `https://api.<votre-domaine>` | Valeur publique intégrée au build web |
-| `EXPO_PUBLIC_API_URL` | `https://api.<votre-domaine>` | Valeur publique intégrée au bundle mobile |
+| `SITE_URL` | `https://safeclick-web.onrender.com` | Doit correspondre exactement à l'origine web pour le CORS |
+| `NEXT_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` | Valeur publique intégrée au build web |
+| `EXPO_PUBLIC_API_URL` | `https://safeclick-btd6.onrender.com` | Valeur publique intégrée au bundle mobile |
 | `DATABASE_URL` | `postgresql+psycopg://...` ou URL Neon `postgres://...` | Le pilote et `sslmode=require` sont ajoutés automatiquement ; SQLite refusé en production |
 | `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | valeurs choisies | Le mot de passe par défaut du compose est un placeholder |
 | `EMAIL_BACKEND` | `smtp` | `console` interdit en production par la pré-vérification |
@@ -140,12 +150,12 @@ Le bundle Metro est vérifié par `npm run mobile:export`. La publication réell
 
 ## 9. Étapes encore manuelles
 
-1. Créer le dépôt distant et pousser `main` pour exécuter le CI.
-2. Définir les secrets GitHub si un job de déploiement est ajouté plus tard ; aucun n'est requis aujourd'hui.
-3. Choisir l'hébergeur avec Docker et PostgreSQL, puis configurer le serveur.
-4. Acheter/configurer le domaine et les DNS.
-5. Mettre en place le reverse proxy HTTPS et les sauvegardes automatiques.
-6. Activer une surveillance externe simple (healthcheck + alertes).
-7. Décider de la publication Android et des tarifs PRO/BUSINESS.
+Le dépôt distant a été poussé, le secret GitHub `DATABASE_URL` a été ajouté, Render a été connecté au dépôt et les deux services sont en ligne avec HTTPS fourni par Render. Restent à décider ou à configurer :
+
+1. Activer une surveillance externe simple (healthcheck + alertes).
+2. Vérifier ou automatiser les sauvegardes Neon ; `npm run db:backup` refuse PostgreSQL.
+3. Configurer un SMTP si l'inscription avec vérification e-mail doit être activée.
+4. Décider de la publication Android et des tarifs PRO/BUSINESS.
+5. Acheter un domaine personnalisé seulement avec accord explicite.
 
 Aucune de ces étapes n'a été exécutée automatiquement et aucune dépense n'a été engagée.

@@ -2,8 +2,20 @@
 
 > Protéger les internautes contre les arnaques numériques, le phishing et les liens malveillants — avec des explications compréhensibles par tous.
 
-**Statut : PHASES 1 à 9 terminées et vérifiées. PHASE 10 préparée : CI GitHub verte ; déploiement réel, domaine, HTTPS et publication Android en attente d'accord.**<br>
+**Statut : PHASES 1 à 10 terminées et vérifiées. Déploiement réel effectué sur Render : API et site en HTTPS gratuit, base Neon en production. Domaine personnalisé, monitoring et publication Android restent en attente d'accord.**<br>
 Le site web et l'application Expo utilisent la même API. Le moteur reste passif : aucun lien n'est visité par le serveur. Le moteur de règles explicites reste la base ; un modèle local Naive Bayes ajoute un signal faible et explicable, avec des métriques mesurées sur un jeu synthétique uniquement ([détails](docs/PHASE7.md)). La revue de sécurité est décrite dans [`docs/SECURITE.md`](docs/SECURITE.md), limites comprises.
+
+## Démo en ligne
+
+| Ressource | URL |
+|---|---|
+| Site web | <https://safeclick-web.onrender.com/> |
+| Offres | <https://safeclick-web.onrender.com/offres> |
+| API — santé | <https://safeclick-btd6.onrender.com/health> |
+| API — informations | <https://safeclick-btd6.onrender.com/api/v1/info> |
+| API — offres | <https://safeclick-btd6.onrender.com/api/v1/billing/plans> |
+
+Plan gratuit : les services peuvent mettre environ une minute à se réveiller après inactivité. Procédure complète : [`docs/RENDER.md`](docs/RENDER.md).
 
 ---
 

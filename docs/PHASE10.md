@@ -4,7 +4,7 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Étape 1 — Intégration continue `[x]`
 
-- [x] Workflow `.github/workflows/ci.yml` sur `push` et `pull_request` vers `main` — exécuté avec succès au premier push (run #1)
+- [x] Workflow `.github/workflows/ci.yml` sur `push` et `pull_request` vers `main` — runs #1 à #5 verts
 - [x] Un seul job de vérifications reproductibles : tests API, typecheck, build web, audit npm, Expo Doctor, export Android
 - [x] Job séparé de validation Docker : `docker compose config` puis build des deux images
 - [x] Permissions GitHub limitées à `contents: read`
@@ -33,23 +33,23 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 - [x] Documentation des variables et des commandes PowerShell
 - [x] Documentation des étapes encore manuelles et des procédures de rollback
 - [x] Base Neon préparée : URL normalisée, TLS forcé, `db:check` et migration manuelle via GitHub
-- [x] Blueprint Render préparé : API + web en plan gratuit, `DATABASE_URL` secret, HTTPS fourni
-- [x] Aucun compte, domaine, certificat, abonnement ou publication Android créé
+- [x] Blueprint Render préparé puis déployé manuellement : API + web en plan gratuit, `DATABASE_URL` secret, HTTPS fourni
+- [x] Aucun compte, domaine, certificat, abonnement ou publication Android créé automatiquement par l'assistant
 
-## Étape 5 — Actions réelles encore en attente `[ ]`
+## Étape 5 — Déploiement réel `[~]`
 
-- [x] Premier `push` exécutant le workflow GitHub Actions — run #1 vert
-- [ ] Création des secrets GitHub (`DATABASE_URL`, etc.) par le propriétaire
-- [ ] Choix et achat du domaine, configuration DNS
-- [ ] Terminaison TLS/HTTPS par le reverse proxy ou l'hébergeur
-- [ ] Serveur ou service d'hébergement avec Docker + PostgreSQL
-- [ ] Sauvegardes PostgreSQL automatisées chez l'hébergeur
+- [x] Secrets GitHub `DATABASE_URL` ajoutés et migration Neon exécutée (run `45569575125`)
+- [x] Services Render créés : API `safeclick` et web `safeclick-web`, plan gratuit, région Oregon
+- [x] `/health`, `/api/v1/info`, `/api/v1/billing/plans`, site web et `/offres` vérifiés
+- [x] CORS et en-têtes de sécurité vérifiés (`docs/RENDER.md`)
+- [ ] Domaine personnalisé — non requis, aucun achat
 - [ ] Surveillance externe et alertes
+- [ ] Sauvegardes Neon vérifiées ou automatisées
 - [ ] Signature et publication de l'APK/AAB Android
 
 ## Vérification locale `[x]`
 
-- [x] `npm run api:test` → 52 tests après ajout du test CORS `X-API-Key`
+- [x] `npm run api:test` → 59 tests, dont le test du blueprint Render
 - [x] `npm run typecheck` → web + mobile + shared OK
 - [x] `npm run web:build` → build standalone généré
 - [x] `npm run mobile:doctor` → 20/20
@@ -58,4 +58,4 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 - [x] `npm audit --audit-level=moderate` → 0 vulnérabilité
 - [x] CI GitHub run #1 → **success** : `Tests, typecheck, build et audit` et `Validation Docker` verts
 
-> Docker est absent de la machine locale, mais le job CI `Validation Docker` a validé le compose et construit les deux images avec succès. Le run #2, déclenché par un commit vide de relance, est redondant. Aucun déploiement réel n'est effectué dans cette phase.
+> Docker est absent de la machine locale, mais le job CI `Validation Docker` a validé le compose et construit les deux images avec succès. Le déploiement réel a ensuite été effectué manuellement sur Render par le propriétaire, sans abonnement payant ni domaine personnalisé.

@@ -4,10 +4,10 @@
 
 services:
   - type: web
-    name: safeclick-api
+    name: safeclick
     runtime: docker
     plan: free
-    region: ohio
+    region: oregon
     dockerfilePath: ./services/api/Dockerfile
     dockerContext: .
     healthCheckPath: /health
@@ -25,23 +25,24 @@ services:
       - key: SITE_URL
         value: https://safeclick-web.onrender.com
       - key: NEXT_PUBLIC_API_URL
-        value: https://safeclick-api.onrender.com
+        value: https://safeclick-btd6.onrender.com
       - key: EXPO_PUBLIC_API_URL
-        value: https://safeclick-api.onrender.com
+        value: https://safeclick-btd6.onrender.com
       - key: EMAIL_BACKEND
         value: console
       - key: RATE_LIMIT_ENABLED
         value: "true"
       - key: RATE_LIMIT_PER_MINUTE
         value: "60"
-    # Les migrations sont idempotentes et restent exécutées avant chaque démarrage.
+    # `preDeployCommand` est réservé aux plans payants : on garde les migrations
+    # idempotentes dans la commande de démarrage, y compris sur le plan gratuit.
     dockerCommand: '/bin/sh -c "python -m alembic -c services/api/alembic.ini upgrade head && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir services/api"'
 
   - type: web
     name: safeclick-web
     runtime: docker
     plan: free
-    region: ohio
+    region: oregon
     dockerfilePath: ./apps/web/Dockerfile
     dockerContext: .
     healthCheckPath: /
@@ -51,6 +52,6 @@ services:
       - key: PORT
         value: "3000"
       - key: NEXT_PUBLIC_API_URL
-        value: https://safeclick-api.onrender.com
+        value: https://safeclick-btd6.onrender.com
       - key: EXPO_PUBLIC_API_URL
-        value: https://safeclick-api.onrender.com
+        value: https://safeclick-btd6.onrender.com
