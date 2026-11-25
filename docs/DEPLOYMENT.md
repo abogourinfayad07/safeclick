@@ -13,6 +13,7 @@ Ce document décrit ce qui est **prêt dans le dépôt** et ce qui reste à fair
 | Image web | `apps/web/Dockerfile` | Prête, sortie Next standalone |
 | Composition des services | `docker-compose.yml` | Prête ; PostgreSQL + API + web, Redis optionnel |
 | Base managée Neon | [`docs/NEON.md`](NEON.md), `.github/workflows/database.yml` | Prête ; URL normalisée, TLS forcé, migration manuelle |
+| Déploiement Render | [`docs/RENDER.md`](RENDER.md), `render.yaml` | Prêt ; API + web en plan gratuit, secrets hors du dépôt |
 | Pré-vérification | `scripts/preflight.py`, `npm run deploy:preflight` | Prête |
 | Limites de sécurité | `docs/SECURITE.md` | Documentées |
 

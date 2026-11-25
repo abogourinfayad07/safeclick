@@ -1,0 +1,56 @@
+# SAFECLICK — Blueprint Render (API + site web)
+# Aucun secret réel ici. Renseignez DATABASE_URL dans le dashboard Render.
+# Les deux services utilisent le plan gratuit : sommeil après 15 min sans trafic.
+
+services:
+  - type: web
+    name: safeclick-api
+    runtime: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./services/api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PORT
+        value: "8000"
+      - key: API_V1_PREFIX
+        value: /api/v1
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SITE_URL
+        value: https://safeclick-web.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        value: https://safeclick-api.onrender.com
+      - key: EXPO_PUBLIC_API_URL
+        value: https://safeclick-api.onrender.com
+      - key: EMAIL_BACKEND
+        value: console
+      - key: RATE_LIMIT_ENABLED
+        value: "true"
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "60"
+    # Les migrations sont idempotentes et restent exécutées avant chaque démarrage.
+    dockerCommand: '/bin/sh -c "python -m alembic -c services/api/alembic.ini upgrade head && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir services/api"'
+
+  - type: web
+    name: safeclick-web
+    runtime: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./apps/web/Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: NEXT_PUBLIC_API_URL
+        value: https://safeclick-api.onrender.com
+      - key: EXPO_PUBLIC_API_URL
+        value: https://safeclick-api.onrender.com

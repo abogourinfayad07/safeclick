@@ -33,6 +33,7 @@ La procédure complète est dans [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 - [x] Documentation des variables et des commandes PowerShell
 - [x] Documentation des étapes encore manuelles et des procédures de rollback
 - [x] Base Neon préparée : URL normalisée, TLS forcé, `db:check` et migration manuelle via GitHub
+- [x] Blueprint Render préparé : API + web en plan gratuit, `DATABASE_URL` secret, HTTPS fourni
 - [x] Aucun compte, domaine, certificat, abonnement ou publication Android créé
 
 ## Étape 5 — Actions réelles encore en attente `[ ]`

@@ -66,7 +66,7 @@ Offres FREE / PRO / BUSINESS depuis une source partagée, quotas journaliers ré
 
 Checklist détaillée : [`docs/PHASE10.md`](docs/PHASE10.md) et [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-CI GitHub exécutée avec succès (run #1), Docker Compose, pré-vérification et documentation prêts. Hébergement, domaine, HTTPS, monitoring et publication Android restent des actions manuelles : aucun déploiement ni abonnement effectué.
+CI GitHub exécutée avec succès, Docker Compose, pré-vérification et documentation prêts. Base Neon créée et migrée, blueprint Render prêt pour l’API et le site. Le déploiement effectif, le domaine, le monitoring et la publication Android restent des actions manuelles : aucun abonnement effectué.
 
 ---
 
